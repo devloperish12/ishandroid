@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainlay"
+    android:layout_marginTop="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lay1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        android:layout_height="wrap_content"
+        android:gravity="right">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/close"
+            android:src="@drawable/close"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lay2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/lay1"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="14dp"
+            android:layout_height="wrap_content"
+            android:text="SEND ENQUIRY"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay2"
+        android:id="@+id/lay3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/name"
+            android:textSize="14dp"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:hint="Name *"/>
+        <EditText
+            android:textSize="14dp"
+            android:id="@+id/pname"
+            android:layout_width="120dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="match_parent"
+            android:hint="Product name"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay3"
+        android:id="@+id/lay4"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="120dp"
+            android:textSize="14dp"
+            android:layout_height="match_parent"
+            android:hint="Mobile Number *"
+            android:id="@+id/mobile"
+            android:maxLength="10"/>
+        <EditText
+            android:id="@+id/customer"
+            android:textSize="14dp"
+            android:layout_width="170dp"
+            android:layout_marginLeft="30dp"
+            android:layout_height="match_parent"
+            android:hint="Customer Product"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/lay4"
+        android:id="@+id/lay5"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:hint="Email *"
+            android:textSize="14dp"
+            android:id="@+id/email"
+            />
+        <Button
+            android:textSize="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_height="match_parent"
+            android:text="chose File"
+
+            android:id="@+id/file"
+            />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="12dp"
+    android:text=" No File chose"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay5"
+        android:id="@+id/lay6"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Comment *"
+            android:textSize="12dp"
+            android:id="@+id/comment"
+            android:maxLength="10"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lay6"
+        android:id="@+id/lay7"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/send"
+            android:gravity="center"
+            android:background="@color/splashorange"
+            android:hint="SUBMIT "
+            android:maxLength="10"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

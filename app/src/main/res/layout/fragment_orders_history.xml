@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.OrdersHistory">
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:id="@+id/tdscashLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:visibility="gone"
+            android:textColor="@color/colorblack"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="My Total Income"
+            android:textSize="@dimen/font_15"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvTdstotalincome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:gravity="center"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/font_15"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/colorGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="My Orders"
+            android:textSize="@dimen/font_15"/>
+
+        <TextView
+            android:id="@+id/tvWallateBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:gravity="center"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/font_15"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@drawable/border_background_square"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:orientation="horizontal"
+                android:weightSum="99">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:text="order id"
+                    android:textColor="@color/colorblack"
+                    android:textSize="12dp"
+                    />
+
+                <View
+                    style="@style/Divider"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:text="ammount"
+                    android:textColor="@color/colorblack"
+                    android:textSize="12dp"
+                    />
+
+                <View
+                    style="@style/Divider"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:text="Status"
+                    android:textColor="@color/colorblack"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <View
+                style="@style/HorizontalDivider"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvWallateHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rvorders"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1" />-->
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/noProdlistFound"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:gravity="center"-->
+        <!--android:text="no product found"-->
+        <!--android:textColor="@color/colorblack"-->
+        <!--android:textSize="@dimen/font_16"-->
+        <!--android:visibility="gone" />-->
+
+
+</RelativeLayout>

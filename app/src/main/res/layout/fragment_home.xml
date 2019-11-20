@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<ProgressBar-->
+
+        <!--android:layout_centerInParent="true"-->
+        <!--android:id="@+id/progress_bar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedscrollviewmain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            // sub services
+            <LinearLayout
+                android:id="@+id/categorylayout"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:background="@color/colorWhite"
+                    android:layout_margin="3dp"
+                    android:id="@+id/rv_subcategory"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp" />
+            </LinearLayout>
+//*********
+
+           <!-- // services
+            <android.support.v7.widget.CardView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_margin="3dp"
+                    android:id="@+id/rv_main"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp" />
+
+            </android.support.v7.widget.CardView>
+            // ********-->
+
+            // slider
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:id="@+id/banner"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/imageSliderViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:layout_alignParentTop="true" />
+
+                    <!--
+                                        <com.viewpagerindicator.CirclePageIndicator
+                                            android:id="@+id/indicator"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="@dimen/margin_140"
+                                            android:padding="10dip"
+                                            app:centered="true"
+                                            app:fillColor="#f05424"
+                                            app:strokeColor="#f05424" />
+                    -->
+                </RelativeLayout>
+
+            </LinearLayout>
+//**************
+            <LinearLayout
+                android:id="@+id/featureproduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+                <!-- android:background="#d8e1e9"-->
+
+
+                <LinearLayout
+                    android:id="@+id/llEduBasket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:text="Featured Product"
+                        android:textColor="@color/colorblack"
+                        android:textSize="@dimen/font_16"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnFeaturedViewMore"
+                        android:layout_width="@dimen/margin_80"
+                        android:layout_height="32dp"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:background="#FF895C"
+                        android:text="View More"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvfeaturedproduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="@dimen/margin_8" />
+            </LinearLayout>
+
+            // led
+
+            <LinearLayout
+                android:visibility="gone"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:orientation="vertical">
+                <!-- android:background="#d8e1e9"-->
+
+
+                <LinearLayout
+                    android:id="@+id/llLed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:text="Led"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorblack"
+                        android:textSize="@dimen/font_16"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnLedViewAll"
+                        android:layout_width="@dimen/margin_80"
+                        android:layout_height="32dp"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:background="#FF895C"
+                        android:text="View All"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite" />
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_margin="10dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/led1"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="200dp" />
+
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/led2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp" />
+
+                            <ImageView
+                                android:id="@+id/led3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            //*********
+
+
+
+            // banner
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10">
+
+                    <!--<android.support.v4.view.ViewPager-->
+                        <!--android:id="@+id/imagebanaer"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/margin_170"-->
+                        <!--android:layout_alignParentTop="true" />-->
+
+                    <!--
+                                        <com.viewpagerindicator.CirclePageIndicator
+                                            android:id="@+id/indicator1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerHorizontal="true"
+                                            android:layout_marginTop="@dimen/margin_140"
+                                            android:padding="10dip"
+                                            app:centered="true"
+                                            app:fillColor="#f05424"
+                                            app:strokeColor="#f05424" />
+                    -->
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llOurServices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginBottom="1dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                   <!-- <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="Our Services"
+                        android:textColor="@color/colorblack"
+                        android:textSize="@dimen/font_16" />-->
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvservices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_8"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_marginRight="@dimen/margin_8" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+
+
+
+            </LinearLayout>
+
+            // hologram
+
+            <!--<LinearLayout-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:orientation="vertical">-->
+                <!--&lt;!&ndash; android:background="#d8e1e9"&ndash;&gt;-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llHologram"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_8"-->
+                    <!--android:layout_marginBottom="1dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="visible">-->
+
+                    <!--<TextView-->
+                        <!--android:text="Hologram"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:textColor="@color/colorblack"-->
+                        <!--android:textSize="@dimen/font_16"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/btnHologramViewAll"-->
+                        <!--android:layout_width="@dimen/margin_80"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_marginRight="@dimen/margin_5"-->
+                        <!--android:background="#FF895C"-->
+                        <!--android:text="View All"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:background="@color/colorWhite"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<LinearLayout-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+
+                            <!--android:id="@+id/hologram1"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/hologram2"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/hologram3"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/hologram4"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+            <!--//*********-->
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:orientation="vertical">-->
+                <!--&lt;!&ndash;android:background="#d8e1e9"&ndash;&gt;-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llFinancialFlux"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_8"-->
+                    <!--android:layout_marginBottom="1dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="visible">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="New Arrivals"-->
+                        <!--android:textColor="@color/colorblack"-->
+                        <!--android:textSize="@dimen/font_16"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/btnNewArrivalViewMore"-->
+                        <!--android:layout_width="@dimen/margin_80"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_marginRight="@dimen/margin_5"-->
+                        <!--android:background="#FF895C"-->
+                        <!--android:text="View More"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+                <!--</LinearLayout>-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/rvNewArrivals"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/margin_8"-->
+                    <!--android:layout_marginTop="@dimen/margin_5"-->
+                    <!--android:layout_marginRight="@dimen/margin_8" />-->
+            <!--</LinearLayout>-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/ivContact"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/margin_150"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@drawable/ic_our_process"-->
+                <!--android:visibility="gone" />-->
+
+            <!--<LinearLayout-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llCreativeGallery"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_8"-->
+                    <!--android:layout_marginBottom="1dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="gone">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="From The Blog"-->
+                        <!--android:textColor="@color/colorblack"-->
+                        <!--android:textSize="@dimen/font_16" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/btnBlogMore"-->
+                        <!--android:layout_width="@dimen/margin_80"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_marginRight="@dimen/margin_5"-->
+                        <!--android:background="#FF895C"-->
+                        <!--android:text="View More"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+                <!--</LinearLayout>-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/rvFromTheBlog"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/margin_8"-->
+                    <!--android:layout_marginTop="@dimen/margin_5"-->
+                    <!--android:layout_marginRight="@dimen/margin_8" />-->
+            <!--</LinearLayout>-->
+
+            <!--<View-->
+                <!--android:id="@+id/viewSmartServe"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/font_1"-->
+                <!--android:layout_marginTop="@dimen/margin_5"-->
+                <!--android:background="#f05424"-->
+                <!--android:visibility="gone" />-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llClientsPartner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/margin_8"-->
+                <!--android:layout_marginBottom="1dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:visibility="gone">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:text="Clients and Partner"-->
+                    <!--android:textColor="@color/colorblack"-->
+                    <!--android:textSize="@dimen/font_16" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rvClientsPartner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/margin_8"-->
+                <!--android:layout_marginTop="@dimen/margin_5"-->
+                <!--android:layout_marginRight="@dimen/margin_8" />-->
+
+
+            <!--//**********-->
+            <!--//banner-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/margin_10"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:layout_marginRight="@dimen/margin_10">-->
+
+                <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/vpslider"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/margin_170"-->
+                    <!--android:layout_alignParentTop="true" />-->
+
+                <!--&lt;!&ndash;<com.viewpagerindicator.CirclePageIndicator-->
+                    <!--android:id="@+id/indicator3"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="@dimen/margin_140"-->
+                    <!--android:padding="10dip"-->
+                    <!--app:centered="true"-->
+                    <!--app:fillColor="#f05424"-->
+                    <!--app:strokeColor="#f05424" />&ndash;&gt;-->
+            <!--</RelativeLayout>-->
+
+            <!--//*********-->
+
+            <!--// securityshutter-->
+
+            <!--<LinearLayout-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:orientation="vertical">-->
+                <!--&lt;!&ndash; android:background="#d8e1e9"&ndash;&gt;-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llsecurityshutter"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_8"-->
+                    <!--android:layout_marginBottom="1dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="visible">-->
+
+                    <!--<TextView-->
+                        <!--android:text="Security Shutter"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:textColor="@color/colorblack"-->
+                        <!--android:textSize="@dimen/font_16"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/btnsecurityshutterViewAll"-->
+                        <!--android:layout_width="@dimen/margin_80"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_marginRight="@dimen/margin_5"-->
+                        <!--android:background="#FF895C"-->
+                        <!--android:text="View All"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:background="@color/colorWhite"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<LinearLayout-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+
+                            <!--android:id="@+id/securityshutter1"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/securityshutter2"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                    <!--</LinearLayout>-->
+                    <!--<LinearLayout-->
+
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/securityshutter3"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/securityshutter4"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="100dp" />-->
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+            <!--//*********-->
+
+
+            <!--// ac-->
+
+            <!--<LinearLayout-->
+                <!--android:visibility="gone"-->
+                <!--android:background="@color/colorWhite"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/margin_10"-->
+                <!--android:orientation="vertical">-->
+                <!--&lt;!&ndash; android:background="#d8e1e9"&ndash;&gt;-->
+
+
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/llac"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/margin_8"-->
+                    <!--android:layout_marginBottom="1dp"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:visibility="visible">-->
+
+                    <!--<TextView-->
+                        <!--android:text="Ac"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:textColor="@color/colorblack"-->
+                        <!--android:textSize="@dimen/font_16"-->
+                        <!--android:textStyle="bold" />-->
+
+                    <!--<Button-->
+                        <!--android:id="@+id/btnAcViewAll"-->
+                        <!--android:layout_width="@dimen/margin_80"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_marginRight="@dimen/margin_5"-->
+                        <!--android:background="#FF895C"-->
+                        <!--android:text="View All"-->
+                        <!--android:textAllCaps="false"-->
+                        <!--android:textColor="@color/colorWhite" />-->
+
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:background="@color/colorWhite"-->
+                    <!--android:orientation="vertical"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content">-->
+                    <!--<LinearLayout-->
+                        <!--android:weightSum="2"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/ac1"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="200dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:orientation="vertical"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="wrap_content">-->
+                            <!--<ImageView-->
+                                <!--android:id="@+id/ac2"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="100dp" />-->
+
+                            <!--<ImageView-->
+                                <!--android:id="@+id/ac3"-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="100dp" />-->
+
+                        <!--</LinearLayout>-->
+
+
+                    <!--</LinearLayout>-->
+
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+
+
+            //*********
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

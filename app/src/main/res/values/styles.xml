@@ -1,0 +1,81 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.actionbar">
+        <item name="colorPrimary">#F58F69</item>
+
+    </style>
+    <style name="AppTheme.default" parent="PayumoneyAppTheme">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/payumoney_primary_dark</item>
+        <item name="colorAccent">@color/payumoney_primary</item>
+        <item name="colorButtonNormal">@color/payumoney_primary</item>
+        <item name="alertDialogTheme">@style/AlertDialogStyle_Default</item>
+    </style>
+
+    <!--  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+          <item name="colorPrimary">#995544</item>
+      </style>-->
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="HorizontalDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:dropDownHorizontalOffset">16dp</item>
+        <item name="android:dropDownVerticalOffset">52dp</item>
+    </style>
+    <style name="MainMenu" parent="Theme.AppCompat.NoActionBar">
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="android:textAppearanceButton">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+    </style>
+
+    // toolbar icon color
+    <style name="toolbariconcolor" parent="Theme.AppCompat.Light.DarkActionBar">
+        ...
+        <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+    </style>
+
+    <style name="MyOverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/colorAccent</item>
+    </style>
+
+    // all toolbar theme
+    <style name="popUpTheme">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+     // ripple style for button
+    <style name="RippleStyleWhite">
+        <item name="mrl_rippleOverlay">true</item>
+        <item name="mrl_rippleColor">@color/white</item>
+        <item name="mrl_rippleHover">true</item>
+        <item name="mrl_rippleAlpha">0.2</item>
+    </style>
+</resources>

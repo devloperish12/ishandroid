@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:orientation="horizontal"
+        android:weightSum="99">
+
+        <TextView
+            android:id="@+id/pointCashHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:layout_weight="20"
+            android:gravity="center|start"
+            android:textColor="@color/colorblack"
+            android:textSize="10dp" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/commentCashHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:layout_weight="20"
+            android:gravity="center|start"
+            android:textColor="@color/colorblack"
+            android:textSize="10dp" />
+
+        <View style="@style/Divider" />
+
+        <TextView
+            android:id="@+id/dateCashHistory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:layout_weight="50"
+            android:gravity="center|start"
+            android:textColor="@color/colorblack"
+            android:textSize="10dp" />
+    </LinearLayout>
+
+    <View style="@style/HorizontalDivider" />
+
+</LinearLayout>

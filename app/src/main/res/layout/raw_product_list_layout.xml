@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_10">
+
+    <android.support.v7.widget.CardView
+        android:layout_marginBottom="@dimen/margin_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:background="#F7F8FA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivProductImage"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
+
+               <!-- <ImageView
+                    android:duplicateParentState="true"
+                    android:id="@+id/ivWishListRemovehome"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_marginLeft="120dp"
+                    android:src="@drawable/wishlist_outline" />
+
+                <ImageView
+                    android:duplicateParentState="true"
+                    android:visibility="gone"
+                    android:id="@+id/ivWishListAddhome"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_width="@dimen/margin_25"
+                    android:layout_height="@dimen/margin_25"
+                    android:layout_marginLeft="120dp"
+                    android:src="@drawable/wishlist_red" />-->
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:lines="2"
+                android:maxLines="2"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/font_14"
+                tools:text="Demo" />
+
+            <TextView
+                android:layout_marginBottom="@dimen/margin_5"
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_8"
+                android:textColor=" #f05424"
+                android:textSize="@dimen/font_18"
+                tools:text="₹ 50000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/layoutAddTocartEduBasket"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/margin_5"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/iv_minus_EduBasket"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:gravity="center"
+                        android:src="@drawable/minus" />
+
+                    <TextView
+                        android:id="@+id/tv_qty_addtocart_EduBasket"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/colorGreen"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:id="@+id/iv_plus_EduBasket"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_addTocart_EduBasket"
+                    android:layout_width="120dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:background="@drawable/shape_button_border"
+                    android:gravity="center"
+                    android:text="Add to cart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/font_15"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

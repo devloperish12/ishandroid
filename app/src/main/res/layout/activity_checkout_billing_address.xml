@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CheckoutBillingAddress">
+    <!--<include layout="@layout/toolbar_layout"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10"
+
+                android:layout_marginTop="@dimen/margin_20">
+
+                <EditText
+                    android:id="@+id/etFirstNameAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="First name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etLastNameAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Last name"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etStreetAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Street"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etStreetTwoAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Street"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etCityAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etRegionAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etPostcodeAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Postcode"
+                    android:inputType="number"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etCountryAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:text="IN"
+                    android:enabled="false"
+                    android:inputType="number"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10">
+
+                <EditText
+                    android:id="@+id/etTelephoneAddNewUserAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Telephone"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_18" />
+            </android.support.design.widget.TextInputLayout>
+
+         <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_10">
+
+        <EditText
+            android:id="@+id/alternateed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alternate Telephone no:"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/font_18" />
+    </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

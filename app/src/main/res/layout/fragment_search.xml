@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGreyLight"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_margin="10dp"
+        android:id="@+id/edittext_search_pro_store"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:padding="10dp"
+        android:background="@drawable/shape_search_border"
+        android:hint="Search for products"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:textColor="@color/colorGreyDark"
+        android:textColorHint="@color/colorGreyDark" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_productListingSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/noProdlistFoundSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_product_found"
+        android:textColor="@color/colorblack"
+        android:textSize="16dp"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

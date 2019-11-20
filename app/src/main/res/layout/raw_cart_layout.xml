@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <ImageView
+                android:id="@+id/iv_cart_product_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_weight="1"
+                android:padding="@dimen/margin_5"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:layout_weight="90"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProductCartListName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Product name"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/font_15" />
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:weightSum="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                        <TextView
+                            android:padding="5dp"
+                            android:layout_weight="1.2"
+                            android:layout_gravity="center"
+                            android:id="@+id/tvProductListCartPrice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:textColor="#f05424"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:visibility="visible"
+                            tools:text="Price" />
+                        <TextView
+                            android:padding="5dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8"
+                            android:id="@+id/tvCartQty"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:textColor="#f05424"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:visibility="visible"
+                            tools:text="Cart Qty :" />
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lineatqty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:id="@+id/layoutAddTocartBest"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:orientation="horizontal"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:layout_gravity="center"
+                                android:text="Qty : "
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:id="@+id/linearSpinner"
+                                >
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinnerqty"
+                                    android:textColor="@color/gray"
+                                    android:gravity="center"
+                                    android:textAlignment="center"
+                                    app:ms_background_color="@color/white"
+                                    app:ms_arrow_tint="@color/gray"
+                                    app:ms_dropdown_max_height="200dp"
+                                    android:focusable="true"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"/>
+                            </LinearLayout>
+
+
+                            // enter qty
+                            <LinearLayout
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:id="@+id/qtymore"
+                                android:layout_gravity="center"
+                                android:background="@drawable/border_background_square"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:visibility="gone">
+                                <EditText
+                                    android:id="@+id/etEnterQty"
+                                    android:inputType="number"
+                                    android:paddingLeft="5dp"
+                                    android:layout_gravity="center"
+                                    android:background="@null"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </LinearLayout>
+
+
+
+                            //*****
+
+                            <!--  <ImageView
+                                  android:id="@+id/minus_bestProduct"
+                                  android:layout_width="20dp"
+                                  android:layout_height="20dp"
+                                  android:gravity="center"
+                                  android:src="@drawable/minus" />
+
+                              <TextView
+                                  android:layout_marginLeft="@dimen/margin_10"
+                                  android:id="@+id/qty_addtocart_bestProduct"
+                                  android:layout_width="20dp"
+                                  android:layout_height="20dp"
+                                  android:layout_gravity="right"
+                                  android:gravity="center"
+                                  tools:text="1"
+                                  android:textColor="@color/colorGreen"
+                                  android:textSize="16dp" />
+
+                              <ImageView
+                                  android:layout_marginLeft="@dimen/margin_10"
+                                  android:id="@+id/plus_bestProduct"
+                                  android:layout_width="20dp"
+                                  android:layout_height="20dp"
+                                  android:src="@drawable/plus" />
+  -->
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:id="@+id/delete_cart"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/delete" />
+
+                </LinearLayout>
+
+                // update qty
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/lineatupdateqty"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="Update"
+                        android:textColor="@color/white"
+                        android:background="@color/splashorange"
+                        android:id="@+id/btqtyupdate"
+                        android:layout_weight="0.6"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp" />
+
+                    <TextView
+                        android:layout_weight="1.4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

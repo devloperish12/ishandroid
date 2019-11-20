@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "114993727088",
+    "firebase_url": "https://indian-smart-hub.firebaseio.com",
+    "project_id": "indian-smart-hub",
+    "storage_bucket": "indian-smart-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114993727088:android:340742728ddb263c",
+        "android_client_info": {
+          "package_name": "com.indiansmarthub.ish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114993727088-l2tokv5usf0b14tpe081eor6pd938c97.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indiansmarthub.ish",
+            "certificate_hash": "67fecdb7a693c3ea39e3558c0a08e6337e748846"
+          }
+        },
+        {
+          "client_id": "114993727088-bbatuno9t22279eahmj6akkufrsb27nk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-UHgwOA4aCy3QZBG3Izf4lc7_J73TNLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114993727088-bbatuno9t22279eahmj6akkufrsb27nk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

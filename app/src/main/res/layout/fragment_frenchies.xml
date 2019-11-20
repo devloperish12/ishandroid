@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.Frenchies">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:id="@+id/mypos"
+    android:layout_height="wrap_content"
+    android:textColor="@color/orange"
+    android:textStyle="bold"
+    android:textSize="15dp"
+    android:layout_gravity="center"
+    android:text="shdgfhdsfguj"/>
+    </LinearLayout>
+    <!--<TextView-->
+        <!--android:paddingLeft="15dp"-->
+        <!--android:paddingRight="15dp"-->
+        <!--android:id="@+id/tvTreeLevel1"-->
+        <!--android:textSize="18dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textAlignment="center"-->
+        <!--android:text="level 1"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@drawable/shape_layout_border"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="40dp" />-->
+
+    <!--<View-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@color/colorGreyDark"-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="30dp"/>-->
+
+    <!--&lt;!&ndash;<View&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="@color/colorGreyDark"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="1dp"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:weightSum="20"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:orientation="horizontal"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<View&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="0.1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="left"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@color/colorGreyDark"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="30dp"/>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<View&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="19.8"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="left"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="1dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="30dp"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<View&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="0.1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginRight="10dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_gravity="right"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@color/colorGreyDark"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="30dp"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center">-->
+
+<!--<android.support.v7.widget.RecyclerView-->
+
+    <!--android:id="@+id/rvFrenchies"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"/>-->
+    <!--<View-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@color/colorGreyDark"-->
+        <!--android:layout_width="1dp"-->
+        <!--android:layout_height="30dp"/>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+
+        <!--android:id="@+id/level3"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+    <!--</LinearLayout>-->
+    <!--&lt;!&ndash;aaa<TextView&ndash;&gt;-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:text="jhuljhgjjuhjh"/>-->
+    <LinearLayout
+        android:id="@+id/tdscashLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:visibility="gone"
+            android:textColor="@color/colorblack"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/margin_10"
+            android:text="Name"
+            android:textSize="@dimen/font_15"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvTdstotalincome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:gravity="center"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/font_15"/>
+
+        <!--<TextView-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorGreen"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="@dimen/margin_10"-->
+            <!--android:text="My Balance"-->
+            <!--android:textSize="@dimen/font_15"/>-->
+
+        <TextView
+            android:id="@+id/tvWallateBalance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:gravity="center"
+            android:textColor="@color/colorblack"
+            android:textSize="@dimen/font_15"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@drawable/border_background_square"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:orientation="horizontal"
+                android:weightSum="99">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="40"
+                    android:gravity="center"
+                    android:text="Name"
+                    android:textColor="@color/colorblack"
+                    android:textSize="12dp"
+                    />
+
+                <View
+                    style="@style/Divider"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/margin_5"
+                    android:layout_weight="50"
+                    android:gravity="center"
+                    android:text="Type"
+                    android:textColor="@color/colorblack"
+                    android:textSize="12dp"
+                    />
+
+                <!--<View-->
+                    <!--style="@style/Divider"/>-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_margin="@dimen/margin_5"-->
+                    <!--android:layout_weight="25"-->
+                    <!--android:gravity="center"-->
+                    <!--android:text="Date"-->
+                    <!--android:textColor="@color/colorblack"-->
+                    <!--android:textSize="12dp" />-->
+            </LinearLayout>
+
+            <View
+                style="@style/HorizontalDivider"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvWallateHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvWallateHistory2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
