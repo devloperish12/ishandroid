@@ -87,7 +87,7 @@ View view;
 //        mProgressBar = view.findViewById(R.id.progress_bar);
     }
 
-    private void getOrderHistoryData() {
+   /* private void getOrderHistoryData() {
         mProgressBar.setVisibility(View.VISIBLE);
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<ModelResponseOrderHistory> categoriesCall = networkService.getordetHistory("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", prefManager.getString("cust_id", ""));
@@ -136,7 +136,7 @@ View view;
 
             }
         });
-    }
+    }*/
     public void getorders()
     {
             final String token = prefManager.getString("cust_id", "");

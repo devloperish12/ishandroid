@@ -13,27 +13,33 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.indiansmarthub.ish.MainActivity;
 import com.indiansmarthub.ish.R;
 import com.indiansmarthub.ish.adapter.ServicesProductListAdapter;
 import com.indiansmarthub.ish.adapter.ViewMoreProductListAdapter;
+import com.indiansmarthub.ish.intrface.onItemCLickListner;
 import com.indiansmarthub.ish.javaclass.Add_Remove_WishList;
 import com.indiansmarthub.ish.model.CategoryProduct;
 import com.indiansmarthub.ish.model.ModelFeaturedProduct;
 import com.indiansmarthub.ish.model.ViewCategoryProducts;
 import com.indiansmarthub.ish.retrofit.NetworkClient;
 import com.indiansmarthub.ish.retrofit.NetworkService;
+import com.indiansmarthub.ish.sqlite.DatabaseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +55,10 @@ public class ServicesProducts extends AppCompatActivity {
     private TextView noProdlistFound;
 
     SharedPreferences prefManager;
+    private int product_id=0;
+    private String cusid="";
+    private int wishlist=0;
+    private String cart="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +90,7 @@ public class ServicesProducts extends AppCompatActivity {
 
     }
 
-    private void getview_category_products(String cate_id) {
+  /*  private void getview_category_products(String cate_id) {
         Log.e("tag_", "tag_");
         progressDialog = new ProgressDialog(ServicesProducts.this);
         progressDialog.setMessage("Loading...");
@@ -146,7 +156,7 @@ public class ServicesProducts extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
 
 
@@ -175,7 +185,28 @@ public class ServicesProducts extends AppCompatActivity {
                     if(status.equals("1")) {
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(ServicesProducts.this,2);
                         rvProductList.setLayoutManager(gridLayoutManager);
-                        ServicesProductListAdapter adapter = new ServicesProductListAdapter(ServicesProducts.this, finalProductModel,jsonArray);
+                        ServicesProductListAdapter adapter = new ServicesProductListAdapter(ServicesProducts.this, finalProductModel,jsonArray,new onItemCLickListner() {
+                            @Override
+                            public void onItemCLick(int position, View view, String entity) {
+                                if(entity.equals("add")){
+                                    try {
+                                        product_id=jsonArray.getJSONObject(position).getInt("id");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    addWishList();
+
+                                }else {
+                                    try {
+                                        product_id=jsonArray.getJSONObject(position).getInt("id");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    addWishList();
+
+                                }
+                            }
+                        });
                         rvProductList.setAdapter(adapter);
                     }
                     else
@@ -205,6 +236,117 @@ public class ServicesProducts extends AppCompatActivity {
 //
 //                return map;
 //            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void addWishList() {
+        final String token = prefManager.getString("cust_id", "");
+        final ProgressDialog dialog = ProgressDialog.show(ServicesProducts.this, "", "Proccessing....Please wait");
+        cusid = prefManager.getString("cust_id", "");
+
+        final String url = "http://52.66.136.244/api/v1/wishlist?qty=1&product_id=" + product_id;
+        RequestQueue requestQueue = Volley.newRequestQueue(ServicesProducts.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                    String status = object.getString("success");
+                    String wishlistid=object.getString("wishlistid");
+                    //JSONObject statusjson=new JSONObject(status);
+                    // JSONArray jsonArray=object.getJSONArray("details");
+                    DatabaseHandler databaseHandler=new DatabaseHandler(ServicesProducts.this);
+                   /* int count=databaseHandler.get*/
+                    if (!wishlistid.equals("0")) {
+
+                        Toast.makeText(ServicesProducts.this, "Product added to wishlist.", Toast.LENGTH_SHORT).show();
+                        getWishList();
+                    } else {
+                        getWishList();
+
+                        Toast.makeText(ServicesProducts.this, "Removed From Wishist.", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                    dialog.dismiss();
+                    ///dialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    dialog.dismiss();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Login", "" + error.getCause());
+                dialog.dismiss();
+                //dialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", token);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void getWishList() {
+        final String token = prefManager.getString("cust_id", "");
+        // final ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Proccessing....Please wait");
+
+        final String url = "http://52.66.136.244/api/v1/wishlist";
+        RequestQueue requestQueue = Volley.newRequestQueue(ServicesProducts.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                    String status = object.getString("success");
+                    //JSONObject statusjson=new JSONObject(status);
+                    // JSONArray jsonArray=object.getJSONArray("details");
+                    if (status.equals("1")) {
+                        JSONArray jsonArray = object.getJSONArray("whislist");
+                        wishlist =  jsonArray.length();
+                        Intent intent = new Intent(ServicesProducts.this, MainActivity.class);
+                        intent.putExtra("cart", "" + cart);
+                        intent.putExtra("wish", "" + wishlist);
+                        startActivity(intent);
+                        finish();
+
+
+                    } else {
+
+                        // Toast.makeText(getActivity(), "alreay in wishlist", Toast.LENGTH_SHORT).show();
+                        // dialog.dismiss();
+                    }
+                    // dialog.dismiss();
+                    ///dialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    // dialog.dismiss();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Login", "" + error.getCause());
+                // dialog.dismiss();
+                //dialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", cusid);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
 
         };
         requestQueue.add(stringRequest);

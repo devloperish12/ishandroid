@@ -178,7 +178,7 @@ double totalprice=0.0;
     }
 
 
-    public void callCartItemsApi(final String cust_id) {
+    /*public void callCartItemsApi(final String cust_id) {
 
          // mProgressBar.setVisibility(View.VISIBLE);
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
@@ -249,16 +249,16 @@ double totalprice=0.0;
                         }
                     } else {
                        // mProgressBar.setVisibility(View.GONE);
-                       /* nocartFound.setVisibility(View.VISIBLE);
-                        viewcart_main_layout.setVisibility(View.GONE);*/
+                       *//* nocartFound.setVisibility(View.VISIBLE);
+                        viewcart_main_layout.setVisibility(View.GONE);*//*
 
 
                     }
                 } else {
                     //mProgressBar.setVisibility(View.GONE);
                     Log.e("tag_er1", "tag_error1");
-                   /* nocartFound.setVisibility(View.VISIBLE);
-                    viewcart_main_layout.setVisibility(View.GONE);*/
+                   *//* nocartFound.setVisibility(View.VISIBLE);
+                    viewcart_main_layout.setVisibility(View.GONE);*//*
 
                 }
             }
@@ -267,13 +267,13 @@ double totalprice=0.0;
             public void onFailure(Call<CartItems> call, Throwable t) {
                 //mProgressBar.setVisibility(View.GONE);
                 Log.e("tag_er", "tag_error");
-               /* nocartFound.setVisibility(View.VISIBLE);
-                viewcart_main_layout.setVisibility(View.GONE);*/
+               *//* nocartFound.setVisibility(View.VISIBLE);
+                viewcart_main_layout.setVisibility(View.GONE);*//*
 
             }
         });
 
-    }
+    }*/
 
 
     private void generateArray() {
@@ -296,11 +296,11 @@ double totalprice=0.0;
             }
             allinone = allinone + datastring + "]}";
             Log.d("tag_allinone", allinone);
-            placeOrder(allinone);
+            /*placeOrder(allinone);*/
      //   }
     }
 
-    private void placeOrder(String json) {
+   /* private void placeOrder(String json) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -325,13 +325,13 @@ double totalprice=0.0;
 
                             }
 
-                           /* if (strpassingvalue!= null && strpassingvalue.equalsIgnoreCase("cartflag_dbcheck")){
+                           *//* if (strpassingvalue!= null && strpassingvalue.equalsIgnoreCase("cartflag_dbcheck")){
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
                                 databaseHandler.emptyCart();
                                 getActivity().finish();
                             }
-                            else {*/
+                            else {*//*
                            try {
                                Intent intent = new Intent(getActivity(), CustomerAddressActivity.class);
                                intent.putExtra("subTotal", cartAmount + "");
@@ -365,7 +365,7 @@ double totalprice=0.0;
                 Toast.makeText(getActivity(), "Something went wrong...!!", Toast.LENGTH_LONG).show();
             }
         });
-    }
+    }*/
 
 
     private void getCart() {
@@ -431,7 +431,7 @@ double totalprice=0.0;
             }
             allinone = allinone + datastring + "]}";
             Log.d("tag_allinone", allinone);
-            placeOrder(allinone);
+            /*placeOrder(allinone);*/
         }
     }
     public void addTocart()

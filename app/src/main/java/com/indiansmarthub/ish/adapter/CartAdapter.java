@@ -37,6 +37,7 @@ import com.indiansmarthub.ish.activity.DetailsActivity;
 import com.indiansmarthub.ish.activity.LoginActivity;
 import com.indiansmarthub.ish.custom.GeneralCode;
 import com.indiansmarthub.ish.fragments.Cart;
+import com.indiansmarthub.ish.javaclass.BottomMenuHelper;
 import com.indiansmarthub.ish.model.Addtocart;
 import com.indiansmarthub.ish.model.GeneralModel;
 import com.indiansmarthub.ish.retrofit.NetworkClient;
@@ -59,20 +60,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.indiansmarthub.ish.MainActivity.mBottomNavigationView;
+
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     Context context;
-  public static List<Addtocart> viewCarts;
+    public static List<Addtocart> viewCarts;
     LinearLayout nocartFound;
     LinearLayout viewcart_main_layout;
 
-    private double cartAmount =0;
+    private double cartAmount = 0;
     private ProgressDialog progressDialog;
     private SharedPreferences prefManager;
     double subTotal = 0;
 
-     String cust_id;
+    String cust_id;
 
     private String qtyValue;
     public static int pos_item = 0;
@@ -84,17 +87,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     float finalprice;
     Cart cart;
     JSONArray jsonArray;
-int oldQty=0;
-String cartct="",wishlistcount="";
-    ArrayList<Integer> qtylist=new ArrayList<>();
+    int oldQty = 0;
+    String cartct = "", wishlistcount = "";
+    ArrayList<Integer> qtylist = new ArrayList<>();
 
-    public CartAdapter(Context context, JSONArray viewCarts, String cust_id, String payment_cart,Cart fragment) {
+    public CartAdapter(Context context, JSONArray viewCarts, String cust_id, String payment_cart, Cart fragment) {
         this.context = context;
         this.jsonArray = viewCarts;
         this.cust_id = cust_id;
         this.payment_cart = payment_cart;
-        this.cart=fragment;
-        cartct=""+jsonArray.length();
+        this.cart = fragment;
+        cartct = "" + jsonArray.length();
 
     }
 
@@ -113,26 +116,77 @@ String cartct="",wishlistcount="";
         prefManager = context.getSharedPreferences("ISH", context.MODE_PRIVATE);
         pos_item = pos;
         try {
-            JSONObject jsonObject=jsonArray.getJSONObject(pos);
-            final String cart_id=jsonObject.getString("id");
+            JSONObject jsonObject = jsonArray.getJSONObject(pos);
+            final String cart_id = jsonObject.getString("id");
             Log.e("tag_p", String.valueOf(pos_item));
             holder.tvProductCartListName.setText(jsonObject.getString("product_name"));
             //   price = Integer.parseInt(String.valueOf(viewCarts.get(pos).getPrice()));
-            holder.tvProductListCartPrice.setText("\u20b9 " +jsonObject.getString("price"));
+            holder.tvProductListCartPrice.setText("\u20b9 " + jsonObject.getString("price"));
             holder.tvCartQty.setText(String.valueOf("Cart Qty : " + jsonObject.getString("qty")));
-            oldQty=jsonObject.getInt("qty");
+            holder.tvCart.setText(String.valueOf("" + jsonObject.getString("qty")));
+            oldQty = jsonObject.getInt("qty");
             qtylist.add(oldQty);
-            final  String id=jsonObject.getString("product_id");
-            final double price=jsonObject.getDouble("price");
-            String imgurl=jsonObject.getString("image_url");
+            final String id = jsonObject.getString("product_id");
+            final double price = jsonObject.getDouble("price");
+            String imgurl = jsonObject.getString("image_url");
             if (payment_cart.equals("payment")) {
                 holder.mlineatqty.setVisibility(View.GONE);
             } else {
                 holder.mlineatqty.setVisibility(View.VISIBLE);
             }
             holder.materialSpinner_qty.setTag(pos);
-        final    TextView textView=holder.tvCartQty;
-            spinnerCall(holder,price,pos,cart_id);
+            holder.ivAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        int x=Integer.parseInt(jsonObject.getString("qty"));
+                        x++;
+                        holder.tvCartQty.setText(String.valueOf("Cart Qty : " +x ));
+                        holder.tvCart.setText(String.valueOf("" + x));
+                        updatecart(cart_id,x);
+
+//
+//
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            holder.ivRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+                        int x=Integer.parseInt(jsonObject.getString("qty"));
+                        x--;
+                        holder.tvCartQty.setText(String.valueOf("Cart Qty : " +x ));
+                        holder.tvCart.setText(String.valueOf("" + x));
+                        if (x==0){
+
+                            if (!prefManager.getString("cust_id", "").isEmpty()) {
+                                addTocart(cart_id);
+                            } else {
+
+                                Intent intent = new Intent(context, MainActivity.class);
+                                intent.putExtra("iscart", true);
+                                context.startActivity(intent);
+                                //notifyDataSetChanged();
+                            }
+
+                        }else {
+
+                            updatecart(cart_id,x);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+            final TextView textView = holder.tvCartQty;
+            spinnerCall(holder, price, pos, cart_id);
 
             // image get offline or online
             if (!prefManager.getString("cust_id", "").isEmpty()) {
@@ -178,12 +232,10 @@ String cartct="",wishlistcount="";
                 }
             });
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        }
-
+    }
 
 
     private void generateArray(String qty) {
@@ -204,16 +256,16 @@ String cartct="",wishlistcount="";
         allinone = allinone + datastring + "]}";
         Log.e("tag_allinone", allinone);
         try {
-            placeOrder(allinone, CartAdapter.pos_item);
-        }catch (Exception e){
+            /*placeOrder(allinone, CartAdapter.pos_item);*/
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
 
-    private void placeOrder(String json, final int position) {
-      final ProgressDialog  progressDialog = new ProgressDialog(context);
+   /* private void placeOrder(String json, final int position) {
+        final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
@@ -229,8 +281,8 @@ String cartct="",wishlistcount="";
                     if (response.body().getSuccess().equals("1")) {
                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         String msg = response.body().getMessage();
-                        if (msg.equals("successfully add to cart")){
-                          //  addTocart_ProductDetails.setText("GO TO CART");
+                        if (msg.equals("successfully add to cart")) {
+                            //  addTocart_ProductDetails.setText("GO TO CART");
 
                             Intent intent = new Intent(context, CartActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -242,12 +294,12 @@ String cartct="",wishlistcount="";
 
                         Log.e("tag_re", msg);
                         progressDialog.dismiss();
-                       /* if (prefManager.getBoolean("isMembership", false)) {
+                       *//* if (prefManager.getBoolean("isMembership", false)) {
 
 
                             progressDialog.dismiss();
 
-                        }*/
+                        }*//*
                     } else {
                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
@@ -267,7 +319,6 @@ String cartct="",wishlistcount="";
             }
         });
     }
-
 
 
     private void callCartDeleteItemApi(final int i) {
@@ -289,8 +340,8 @@ String cartct="",wishlistcount="";
                     if (response.body().getSuccess().equals("1")) {
                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         String msg = response.body().getMessage();
-                        if (msg.equals("deleted from cart")){
-                         //   addTocart_ProductDetails.setText("GO TO CART");
+                        if (msg.equals("deleted from cart")) {
+                            //   addTocart_ProductDetails.setText("GO TO CART");
 
                             Log.e("tag_", "tag_");
 
@@ -301,16 +352,15 @@ String cartct="",wishlistcount="";
                             context.startActivity(intent);
 
 
-
                         }
                         Log.e("tag_re", msg);
                         progressDialog.dismiss();
-                       /* if (prefManager.getBoolean("isMembership", false)) {
+                       *//* if (prefManager.getBoolean("isMembership", false)) {
 
 
                             progressDialog.dismiss();
 
-                        }*/
+                        }*//*
                     } else {
                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
@@ -331,10 +381,10 @@ String cartct="",wishlistcount="";
         });
 
 
-    }
+    }*/
 
     @SuppressLint("ResourceAsColor")
-    private void spinnerCall(final CartHolder holder, final double price, final int pos,final String itid) {
+    private void spinnerCall(final CartHolder holder, final double price, final int pos, final String itid) {
 
         try {
             ArrayList<String> qty = new ArrayList<>();
@@ -365,8 +415,8 @@ String cartct="",wishlistcount="";
             holder.materialSpinner_qty.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-                    oldQty= qtylist.get(pos);
-                    if(position<=10) {
+                    oldQty = qtylist.get(pos);
+                    if (position <= 10) {
 
                         updatecart(itid, position);
                         if (view.getId() == R.id.spinnerqty) {
@@ -394,98 +444,91 @@ String cartct="",wishlistcount="";
                                 oldQty = position;
                                 qtylist.set(pos, position);
 
-                                cart.docomthing("1", total, true);
+                                    cart.docomthing("1", total, true);
+                                }
                             }
                         }
-                    }
-//                        if (position == 0){
+//                        if (x == 0){
 //                            oldQty
 //                            //   qtyValue = "Please Select";
-//                        } else if (position == 1) {
+//                        } else if (x == 1) {
 //                            qtyValue = "1";
-//                        } else if (position == 2) {
+//                        } else if (x == 2) {
 //                            qtyValue = "2";
-//                        } else if (position == 3) {
+//                        } else if (x == 3) {
 //                            qtyValue = "3";
-//                        } else if (position == 4) {
+//                        } else if (x == 4) {
 //                            qtyValue = "4";
-//                        } else if (position == 5) {
+//                        } else if (x == 5) {
 //                            qtyValue = "5";
-//                        } else if (position == 6) {
+//                        } else if (x == 6) {
 //                            qtyValue = "6";
-//                        } else if (position == 7) {
+//                        } else if (x == 7) {
 //                            qtyValue = "7";
-//                        } else if (position == 8) {
+//                        } else if (x == 8) {
 //                            qtyValue = "8";
-//                        } else if (position == 9) {
+//                        } else if (x == 9) {
 //                            qtyValue = "9";
 //                        }
-//                        else if (position == 10) {
+//                        else if (x == 10) {
 //                            qtyValue = "10";
 //                        }
-                        if (position == 11) {
+                    if (position == 11) {
 
-                            holder.mLinearSpinner.setVisibility(View.GONE);
-                            holder.mLinearMoreQty.setVisibility(View.VISIBLE);
-                            holder.mLineatupdateqty.setVisibility(View.VISIBLE);
+                        holder.mLinearSpinner.setVisibility(View.GONE);
+                        holder.mLinearMoreQty.setVisibility(View.VISIBLE);
+                        holder.mLineatupdateqty.setVisibility(View.VISIBLE);
 
-                            holder.btUpdateQty.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    updatecart(itid,position);
+                        holder.btUpdateQty.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                updatecart(itid, position);
 
-                                    if (holder.mEnterQty.getText().toString().isEmpty()) {
-                                        Toast.makeText(context, "Please Enter Qty", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
+                                if (holder.mEnterQty.getText().toString().isEmpty()) {
+                                    Toast.makeText(context, "Please Enter Qty", Toast.LENGTH_SHORT).show();
+                                } else {
 
-                                        qtyValue = holder.mEnterQty.getText().toString();
-                                        if (prefManager.getString("cust_id", "").isEmpty()) {
-                                            addInDatabase(qtyValue);
-                                        }
-                                        else {
-                                            updatecart(itid,Integer.parseInt(qtyValue));
+                                    qtyValue = holder.mEnterQty.getText().toString();
+                                    if (prefManager.getString("cust_id", "").isEmpty()) {
+                                        addInDatabase(qtyValue);
+                                    } else {
+                                        updatecart(itid, Integer.parseInt(qtyValue));
 
-                                            //generateArray(qtyValue);
-                                        }
-
+                                        //generateArray(qtyValue);
                                     }
 
                                 }
-                            });
-                            holder.btUpdateQty.addTextChangedListener(new TextWatcher() {
-                                private String previousDigits, num;
-                                private boolean textChanged = false;
 
-                                @Override
-                                public void onTextChanged(CharSequence currentDigits, int start,
-                                                          int before, int count) {
-                                   if(count>0)
-                                   {
-                                       try {
+                            }
+                        });
+                        holder.btUpdateQty.addTextChangedListener(new TextWatcher() {
+                            private String previousDigits, num;
+                            private boolean textChanged = false;
+
+                            @Override
+                            public void onTextChanged(CharSequence currentDigits, int start,
+                                                      int before, int count) {
+                                if (count > 0) {
+                                    try {
                                         //   updatecart(itid,position);
 
-                                           String value = holder.btUpdateQty.getText().toString();
-                                        int   intval=Integer.parseInt(value);
-                                           if(intval<oldQty)
-                                           {
-                                               int calprice=oldQty-intval;
-                                               double total=price*calprice;
-                                               cart.docomthing("1",total,false);
-                                           }
-                                           else
-                                           {
-                                               int calprice=intval-oldQty;
-                                               double total=price*calprice;
-                                               cart.docomthing("1",total,true);
-                                           }
-                                          // previousDigits = currentDigits.toString();
-                                       }catch (Exception e)
-                                       {
-                                           e.printStackTrace();
-                                       }
-                                   }
+                                        String value = holder.btUpdateQty.getText().toString();
+                                        int intval = Integer.parseInt(value);
+                                        if (intval < oldQty) {
+                                            int calprice = oldQty - intval;
+                                            double total = price * calprice;
+                                            cart.docomthing("1", total, false);
+                                        } else {
+                                            int calprice = intval - oldQty;
+                                            double total = price * calprice;
+                                            cart.docomthing("1", total, true);
+                                        }
+                                        // previousDigits = currentDigits.toString();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
+                            }
 
                                 @Override
                                 public void beforeTextChanged(CharSequence s, int start, int count,
@@ -501,8 +544,7 @@ String cartct="",wishlistcount="";
 
 
                         }
-//
-//
+
 //                        pos_item = (int) view.getTag();
 //                        Log.e("tag_itemp", String.valueOf(pos_item));
 //
@@ -527,14 +569,14 @@ String cartct="",wishlistcount="";
                     e.printStackTrace();
                 }*/
 
-                        //  }
+                    //  }
 
 
                 }
             });
 
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -546,12 +588,12 @@ String cartct="",wishlistcount="";
 
 
     public class CartHolder extends RecyclerView.ViewHolder {
-        ImageView iv_cart_product_image, minus_bestProduct, plus_bestProduct, delete_cart;
-        TextView tvProductCartListName, tvProductListCartPrice, qty_addtocart_bestProduct, tvCartQty;
-       MaterialSpinner materialSpinner_qty;
-       LinearLayout mlineatqty, mLinearSpinner, mLinearMoreQty, mLineatupdateqty;
+        ImageView iv_cart_product_image, ivAdd, ivRemove, delete_cart;
+        TextView tvProductCartListName, tvProductListCartPrice, tvCart, tvCartQty;
+        MaterialSpinner materialSpinner_qty;
+        LinearLayout mlineatqty, mLinearSpinner, mLinearMoreQty, mLineatupdateqty;
         TextView btUpdateQty;
-       EditText mEnterQty;
+        EditText mEnterQty;
 
 
         public CartHolder(@NonNull View itemView) {
@@ -559,7 +601,10 @@ String cartct="",wishlistcount="";
             iv_cart_product_image = itemView.findViewById(R.id.iv_cart_product_image);
             tvProductCartListName = itemView.findViewById(R.id.tvProductCartListName);
             tvProductListCartPrice = itemView.findViewById(R.id.tvProductListCartPrice);
+            ivAdd = itemView.findViewById(R.id.ivAdd);
+            ivRemove = itemView.findViewById(R.id.ivRemove);
             tvCartQty = itemView.findViewById(R.id.tvCartQty);
+            tvCart=itemView.findViewById(R.id.tvCart);
             mlineatqty = itemView.findViewById(R.id.lineatqty);
             delete_cart = itemView.findViewById(R.id.delete_cart);
             materialSpinner_qty = itemView.findViewById(R.id.spinnerqty);
@@ -572,12 +617,12 @@ String cartct="",wishlistcount="";
     }
 
     private void addInDatabase(String qtyValue) {
-         pricelocal = Integer.parseInt(String.valueOf(viewCarts.get(pos_item).getPrice())) * Integer.parseInt(qtyValue);
-         Log.e("tag_pl", String.valueOf(pricelocal));
-         //   holder.tvProductListCartPrice.setText("\u20b9 " + String.format("%.2f", price));
+        pricelocal = Integer.parseInt(String.valueOf(viewCarts.get(pos_item).getPrice())) * Integer.parseInt(qtyValue);
+        Log.e("tag_pl", String.valueOf(pricelocal));
+        //   holder.tvProductListCartPrice.setText("\u20b9 " + String.format("%.2f", price));
 
         databaseHandler.updateCart(viewCarts.get(pos_item).getId(), qtyValue, viewCarts.get(pos_item).getSku(), String.valueOf(pricelocal), viewCarts.get(pos_item).getName());
-     //   cartDataChange(qtyValue);
+        //   cartDataChange(qtyValue);
     }
 
 
@@ -606,55 +651,53 @@ String cartct="",wishlistcount="";
 
         }
     }
-    public void addTocart(String cust_id)
-    {
-        final String token=prefManager.getString("cust_id","");
-       // final ProgressDialog dialog = ProgressDialog.show(context, "", "Proccessing....Please wait");
 
-        final String url="http://52.66.136.244/api/v1/cart/"+cust_id;
+    public void addTocart(String cust_id) {
+        final String token = prefManager.getString("cust_id", "");
+        // final ProgressDialog dialog = ProgressDialog.show(context, "", "Proccessing....Please wait");
+
+        final String url = "http://52.66.136.244/api/v1/cart/" + cust_id;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
                     object = new JSONObject(response);
-                    String status=object.getString("success");
+                    String status = object.getString("success");
                     //JSONObject statusjson=new JSONObject(status);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if(status.equals("1")) {
+                    if (status.equals("1")) {
                         getWishList();
 
 //                        addTocart_ProductDetails.setBackgroundResource(R.color.colorGreen);
 //                        addTocart_ProductDetails.setText("Go To Cart");
 
-                    }
-                    else
-                    {
+                    } else {
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("iscart", true);
 
-                        intent.putExtra("cart",""+cartct);
-                        intent.putExtra("wish",""+wishlistcount);
+                        intent.putExtra("cart", "" + cartct);
+                        intent.putExtra("wish", "" + wishlistcount);
                         context.startActivity(intent);
 
                         context.startActivity(intent);
 
-                      //  Toast.makeText(DetailsActivity.this, "alreay in wishlist", Toast.LENGTH_SHORT).show();
-                       // dialog.dismiss();
+                        //  Toast.makeText(DetailsActivity.this, "alreay in wishlist", Toast.LENGTH_SHORT).show();
+                        // dialog.dismiss();
                     }
-                  //  dialog.dismiss();
+                    //  dialog.dismiss();
                     ///dialog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                  //  dialog.dismiss();
+                    //  dialog.dismiss();
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
-              //  dialog.dismiss();
+                Log.d("Login", "" + error.getCause());
+                //  dialog.dismiss();
                 //dialog.dismiss();
             }
         }) {
@@ -671,34 +714,32 @@ String cartct="",wishlistcount="";
         };
         requestQueue.add(stringRequest);
     }
-    public void updatecart( final String cartid, final int posission)
-    {
-        final String token=prefManager.getString("cust_id","");
+
+    public void updatecart(final String cartid, final int posission) {
+        final String token = prefManager.getString("cust_id", "");
         // final ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Proccessing....Please wait");
-        final String url="http://52.66.136.244/api/v1/updatecart?id="+cartid+"&qty="+posission;
+        final String url = "http://52.66.136.244/api/v1/updatecart?id=" + cartid + "&qty=" + posission;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
                     object = new JSONObject(response);
-                    String status=object.getString("success");
+                    String status = object.getString("success");
                     //JSONObject statusjson=new JSONObject(status);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if(status.equals("1")) {
+                    if (status.equals("1")) {
 //                        JSONArray jsonArray = object.getJSONArray("whislist");
 //                        String wishlist=""+jsonArray.length();
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("iscart", true);
-                        intent.putExtra("cart",""+cartct);
-                       // intent.putExtra("wish",""+wishlist);
+                        intent.putExtra("cart", "" + cartct);
+                        // intent.putExtra("wish",""+wishlist);
                         context.startActivity(intent);
 
 
-                    }
-                    else
-                    {
+                    } else {
 
                         // Toast.makeText(getActivity(), "alreay in wishlist", Toast.LENGTH_SHORT).show();
                         // dialog.dismiss();
@@ -713,7 +754,7 @@ String cartct="",wishlistcount="";
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
+                Log.d("Login", "" + error.getCause());
                 // dialog.dismiss();
                 //dialog.dismiss();
             }
@@ -738,34 +779,31 @@ String cartct="",wishlistcount="";
         requestQueue.add(stringRequest);
     }
 
-    public void getWishList()
-    {
-        final String token=prefManager.getString("cust_id","");
+    public void getWishList() {
+        final String token = prefManager.getString("cust_id", "");
         // final ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Proccessing....Please wait");
-        final String url="http://52.66.136.244/api/v1/wishlist";
+        final String url = "http://52.66.136.244/api/v1/wishlist";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
                     object = new JSONObject(response);
-                    String status=object.getString("success");
+                    String status = object.getString("success");
                     //JSONObject statusjson=new JSONObject(status);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if(status.equals("1")) {
+                    if (status.equals("1")) {
                         JSONArray jsonArray = object.getJSONArray("whislist");
-                        String wishlist=""+jsonArray.length();
+                        String wishlist = "" + jsonArray.length();
                         Intent intent = new Intent(context, MainActivity.class);
                         intent.putExtra("iscart", true);
-                        intent.putExtra("cart",""+cartct);
-                        intent.putExtra("wish",""+wishlist);
+                        intent.putExtra("cart", "" + cartct);
+                        intent.putExtra("wish", "" + wishlist);
                         context.startActivity(intent);
 
 
-                    }
-                    else
-                    {
+                    } else {
 
                         // Toast.makeText(getActivity(), "alreay in wishlist", Toast.LENGTH_SHORT).show();
                         // dialog.dismiss();
@@ -780,7 +818,7 @@ String cartct="",wishlistcount="";
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
+                Log.d("Login", "" + error.getCause());
                 // dialog.dismiss();
                 //dialog.dismiss();
             }

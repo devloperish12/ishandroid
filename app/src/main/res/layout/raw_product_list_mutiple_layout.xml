@@ -3,58 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_margin="@dimen/dimen_2dp"
     android:layout_height="wrap_content"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="@dimen/margin_5">
+    >
 
     <android.support.v7.widget.CardView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+
         android:layout_gravity="center"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:cardElevation="1dp">
 
 
 
         <LinearLayout
+            android:background="#F7F8FA"
+
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
+
             android:orientation="vertical">
 
             <RelativeLayout
-                android:layout_width="150dp"
+                android:layout_margin="5dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/iv_product_list_image"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/margin_5"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo" />
 
                 <ImageView
                     android:id="@+id/ivWishListRemove"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_marginLeft="120dp"
+                    android:layout_width="30dp"
+                    android:visibility="visible"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginTop="@dimen/margin_5"
                     android:src="@drawable/wishlist_red" />
 
                 <ImageView
                     android:id="@+id/ivWishListAdd"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_marginLeft="120dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+
+
                     android:layout_marginTop="@dimen/margin_5"
                     android:src="@drawable/wishlist_outline"
-                    android:visibility="gone" />
+                    android:visibility="invisible" />
 
             </RelativeLayout>
 
@@ -76,7 +82,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
                 android:textColor=" #f05424"
                 android:textSize="@dimen/font_18"
                 tools:text="₹ 50000" />

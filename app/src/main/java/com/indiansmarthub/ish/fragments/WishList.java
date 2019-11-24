@@ -90,14 +90,14 @@ public class WishList extends Fragment {
 
     private void init() {
         databaseHandler = new DatabaseHandler(getActivity());
-     //   cartCount = findViewById(R.id.cartCount);
+        //   cartCount = findViewById(R.id.cartCount);
         rvWishList = view.findViewById(R.id.rvWishList);
         viewwishlist_main_layout = view.findViewById(R.id.notFound);
-      //  tryAgain = findViewById(R.id.tryAgain);
-     //   internetLayout = findViewById(R.id.internetLayout);
+        //  tryAgain = findViewById(R.id.tryAgain);
+        //   internetLayout = findViewById(R.id.internetLayout);
     }
 
-//    private void getWishlist() {
+    //    private void getWishlist() {
 //       progressBar.setVisibility(View.VISIBLE);
 //
 //        NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
@@ -166,23 +166,22 @@ public class WishList extends Fragment {
 //        });
 //
 //    }
-public void getWishList()
-    {
-        final String token=prefManager.getString("cust_id","");
+    public void getWishList() {
+        final String token = prefManager.getString("cust_id", "");
         final ProgressDialog dialog = ProgressDialog.show(getContext(), "", "Proccessing....Please wait");
 
-        final String url="http://52.66.136.244/api/v1/wishlist";
+        final String url = "http://52.66.136.244/api/v1/wishlist";
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
                     object = new JSONObject(response);
-                    String status=object.getString("success");
+                    String status = object.getString("success");
                     //JSONObject statusjson=new JSONObject(status);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if(status.equals("1")) {
+                    if (status.equals("1")) {
                         JSONArray jsonArray = object.getJSONArray("whislist");
                         if (jsonArray.length() > 0) {
                             GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -193,11 +192,9 @@ public void getWishList()
                         } else {
                             rvWishList.setVisibility(View.GONE);
                             viewwishlist_main_layout.setVisibility(view.VISIBLE);
-                           // dialog.dismiss();
+                            // dialog.dismiss();
                         }
-                    }
-                    else
-                    {
+                    } else {
 
                         Toast.makeText(getActivity(), "alreay in wishlist", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
@@ -212,7 +209,7 @@ public void getWishList()
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
+                Log.d("Login", "" + error.getCause());
                 dialog.dismiss();
                 //dialog.dismiss();
             }
@@ -228,8 +225,6 @@ public void getWishList()
         };
         requestQueue.add(stringRequest);
     }
-
-
 
 
 }

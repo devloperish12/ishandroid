@@ -37,6 +37,7 @@ import com.indiansmarthub.ish.model.ServicesModel;
 import com.indiansmarthub.ish.model.SubCategoryProduct;
 import com.indiansmarthub.ish.model.ViewCategoryProducts;
 import com.indiansmarthub.ish.model.searchresponse.SearchResponseModel;
+import com.indiansmarthub.ish.pojo.UserUpdateResponse;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,6 +48,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface NetworkService {
 
@@ -227,8 +229,8 @@ public interface NetworkService {
     Call<ModelResponseOrderDetails> getTrakingorder(@Field("hashkey") String hashkey, @Field("orderid") String orderid, @Field("email") String email);
 
     @FormUrlEncoded
-    @POST("contact.php")
-    Call<GeneralModel> setContacts(@Field("hashkey") String hashkey, @Field("name") String name, @Field("email_id") String email_id, @Field("mobile_number") String mobile_number, @Field("comment") String comment);
+    @POST("contactus")
+    Call<GeneralModel> setContacts(@Field("name") String name, @Field("email") String email_id, @Field("phone") String mobile_number, @Field("comment") String comment);
 
     @FormUrlEncoded
     @POST("banner_offer.php")
@@ -292,6 +294,17 @@ public interface NetworkService {
     @FormUrlEncoded
     @POST("search")
     Call<SearchResponseModel> searchApi(@Field("search") String search);
+    @POST("userupdate")
+    Call<UserUpdateResponse>updateUser(@Query("name") String name,
+                                       @Query("last_name") String lastname,
+                                       @Query("address") String address,
+                                       @Query("address1") String address1,
+                                       @Query("mobile") String mobile,
+                                       @Query("city") String city,
+                                       @Query("state") String state,
+                                       @Query("zip") String zip,
+                                       @Query("tax_vat_number") String tax_vat_number
+                                  );
 
 
 }

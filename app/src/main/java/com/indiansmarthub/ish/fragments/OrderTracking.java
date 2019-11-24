@@ -86,7 +86,7 @@ public class OrderTracking extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "Enter Phone Number Or Email...!!", Toast.LENGTH_SHORT).show();
 
             }else {
-                getOrderTracking();
+                /*getOrderTracking();*/
             }
         }else {
             GeneralCode.showDialog(getActivity());
@@ -103,7 +103,7 @@ public class OrderTracking extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void getOrderTracking() {
+   /* private void getOrderTracking() {
         mProgressBar.setVisibility(View.VISIBLE);
 
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
@@ -158,6 +158,6 @@ public class OrderTracking extends Fragment implements View.OnClickListener {
 
             }
         });
-    }
+    }*/
 
 }

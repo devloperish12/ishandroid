@@ -89,6 +89,7 @@ public class CheckoutBillingAddress extends AppCompatActivity {
         etTelephoneAddNewUserAddress = findViewById(R.id.etTelephoneAddNewUserAddress);
         alternatenoed=findViewById(R.id.alternateed);
     }
+/*
 
     private void getCustomerAddressCreate() {
         progressDialog = new ProgressDialog(CheckoutBillingAddress.this);
@@ -122,6 +123,7 @@ public class CheckoutBillingAddress extends AppCompatActivity {
         });
 
     }
+*/
 
 
 

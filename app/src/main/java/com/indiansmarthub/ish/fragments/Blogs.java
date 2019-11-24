@@ -55,7 +55,7 @@ View view;
 
         if (GeneralCode.isConnectingToInternet(getActivity())) {
 
-            getViewMoreBlogProductList();
+           /* getViewMoreBlogProductList();*/
 
         } else {
             GeneralCode.showDialog(getActivity());
@@ -72,7 +72,7 @@ View view;
         mProgressbar = view.findViewById(R.id.progress_bar);
     }
 
-    private void getViewMoreBlogProductList() {
+  /*  private void getViewMoreBlogProductList() {
         mProgressbar.setVisibility(View.VISIBLE);
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<ModelResponseBlog> categoriesCall = networkService.getBlogVies("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo");
@@ -123,7 +123,7 @@ View view;
 
             }
         });
-    }
+    }*/
 
     private void calllAdapter() {
         blogViweAdapterl = new BlogViweAdapter(getActivity(), finalCreativeGallery);

@@ -53,7 +53,7 @@ public class OrderTrackingActivity extends AppCompatActivity {
         try {
             orderid = getIntent().getStringExtra("order_id");
             String email = prefManager.getString("email", "");
-            getOrderTracking(orderid, email);
+          /*  getOrderTracking(orderid, email);*/
 
             Log.e("tag_order", orderid + "," + email);
         }
@@ -90,7 +90,7 @@ public class OrderTrackingActivity extends AppCompatActivity {
 
 
 
-    private void getOrderTracking(String orderid, String email) {
+ /*   private void getOrderTracking(String orderid, String email) {
         progressDialog = new ProgressDialog(OrderTrackingActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -143,7 +143,7 @@ public class OrderTrackingActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Payment Status"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSuccessFullMessage"/>
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Your order placed SuccessFully."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvText"/>
+    <TextView
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:id="@+id/tvAbc"
+        android:text="Your order number is:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       />
+
+</LinearLayout>

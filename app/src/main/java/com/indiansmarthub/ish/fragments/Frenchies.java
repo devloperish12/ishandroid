@@ -94,7 +94,7 @@ RecyclerView mRecyclerView,rvlevel2;
     }
 
 
-    private void callfrenchiesApi() {
+    /*private void callfrenchiesApi() {
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -146,7 +146,7 @@ RecyclerView mRecyclerView,rvlevel2;
 
             }
         });
-    }
+    }*/
 public void getlevel()
 {
          final String token = prefManager.getString("cust_id", "");

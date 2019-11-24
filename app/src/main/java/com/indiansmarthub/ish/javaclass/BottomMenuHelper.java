@@ -34,7 +34,7 @@ public class BottomMenuHelper {
     public static void removeBadge(BottomNavigationView bottomNavigationView, @IdRes int itemId) {
         BottomNavigationItemView itemView = bottomNavigationView.findViewById(itemId);
         if (itemView.getChildCount() == 3) {
-            itemView.removeViewAt(2);
+            itemView.removeViewAt(4);
         }
     }
 

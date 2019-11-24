@@ -150,7 +150,7 @@ public class SearchFragment extends Fragment {
 
         return view;
     }
-
+/*
     private void getProducts(String name)
     {
         if(GeneralCode.isConnectingToInternet(fragment.getContext())) {
@@ -177,7 +177,7 @@ public class SearchFragment extends Fragment {
                             //   finalProductSearch.clear();
                             //    getProductsSerach = response.body().getSearch();
                             ArrayList<ModelSearchProduct> finalProductSearch = new ArrayList<>();
-                            /*finalProductSearch.addAll(response.body().getSearch());*/
+                            *//*finalProductSearch.addAll(response.body().getSearch());*//*
 
                             // call adapter
                             GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -186,14 +186,14 @@ public class SearchFragment extends Fragment {
 //                            recyclerview_productListingSearch.setAdapter(adapter);
                             //
 
-                         /*else {
+                         *//*else {
                             noProdlistFoundSearch.setVisibility(View.VISIBLE);
                             recyclerview_productListingSearch.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                             progressBar.setVisibility(View.GONE);
-                        }*/
+                        }*//*
                         } else {
                             noProdlistFoundSearch.setVisibility(View.VISIBLE);
                             recyclerview_productListingSearch.setVisibility(View.GONE);
@@ -224,7 +224,7 @@ public class SearchFragment extends Fragment {
         }else {
             Toast.makeText(fragment.getContext(), "Please check your internet...", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     public void searchapi(String seval) {
       //  final String token = prefManager.getString("cust_id", "");

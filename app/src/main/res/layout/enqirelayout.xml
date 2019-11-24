@@ -46,12 +46,18 @@
         <EditText
             android:id="@+id/name"
             android:textSize="14dp"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:maxLength="30"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:hint="Name *"/>
         <EditText
             android:textSize="14dp"
             android:id="@+id/pname"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:maxLength="30"
             android:layout_width="120dp"
             android:layout_marginLeft="30dp"
             android:layout_height="match_parent"
@@ -72,11 +78,16 @@
             android:textSize="14dp"
             android:layout_height="match_parent"
             android:hint="Mobile Number *"
+            android:inputType="number"
+            android:singleLine="true"
             android:id="@+id/mobile"
             android:maxLength="10"/>
         <EditText
             android:id="@+id/customer"
             android:textSize="14dp"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:maxLength="30"
             android:layout_width="170dp"
             android:layout_marginLeft="30dp"
             android:layout_height="match_parent"
@@ -95,6 +106,9 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:hint="Email *"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:maxLength="30"
             android:textSize="14dp"
             android:id="@+id/email"
             />
@@ -103,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_height="match_parent"
-            android:text="chose File"
+            android:text="choose File"
 
             android:id="@+id/file"
             />
@@ -126,9 +140,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Comment *"
+            android:inputType="textCapSentences"
+            android:singleLine="true"
+            android:maxLength="90"
             android:textSize="12dp"
             android:id="@+id/comment"
-            android:maxLength="10"/>
+            />
 
     </LinearLayout>
 

@@ -19,6 +19,7 @@ import com.indiansmarthub.ish.R;
 import com.indiansmarthub.ish.activity.DetailsActivity;
 import com.indiansmarthub.ish.activity.LoginActivity;
 import com.indiansmarthub.ish.custom.GeneralCode;
+import com.indiansmarthub.ish.intrface.onItemCLickListner;
 import com.indiansmarthub.ish.javaclass.Add_Remove_WishList;
 import com.indiansmarthub.ish.javaclass.BottomMenuHelper;
 import com.indiansmarthub.ish.model.CategoryProduct;
@@ -41,12 +42,14 @@ public class ServicesProductListAdapter extends RecyclerView.Adapter<ServicesPro
     private DatabaseHandler databaseHandler;
     private SharedPreferences prefManager;
     JSONArray jsonArray;
+    public onItemCLickListner listner;
 
-    public ServicesProductListAdapter(Context context, List<CategoryProduct> finalProductModel, JSONArray jsonArray) {
+    public ServicesProductListAdapter(Context context, List<CategoryProduct> finalProductModel, JSONArray jsonArray, onItemCLickListner listner) {
         this.context = context;
         this.finalProductModel = finalProductModel;
         databaseHandler = new DatabaseHandler(context);
         this.jsonArray=jsonArray;
+        this.listner=listner;
     }
 
     @NonNull
@@ -66,6 +69,19 @@ public class ServicesProductListAdapter extends RecyclerView.Adapter<ServicesPro
        // final CategoryProduct modelProductList = finalProductModel.get(holder.getAdapterPosition());
         //int qty = databaseHandler.getQty(finalProductModel.get(holder.getAdapterPosition()).getIds(), finalProductModel.get(holder.getAdapterPosition()).getSku());
        int qty=jsonObject.getInt("stock_avail");
+            holder.ivWishListAdd.setOnClickListener(view -> {
+                listner.onItemCLick(i,view,"add");
+                holder.ivWishListAdd.setVisibility(View.GONE);
+
+                holder.ivWishListRemove.setVisibility(View.VISIBLE);
+
+
+            });
+            holder.ivWishListRemove.setOnClickListener(view -> {
+                listner.onItemCLick(i,view,"remove");
+                holder.ivWishListAdd.setVisibility(View.VISIBLE);
+                holder.ivWishListRemove.setVisibility(View.GONE);
+            });
         if (qty == 0) {
             holder.qty_addtocart.setText("1");
             holder.tv_addtocart.setVisibility(View.VISIBLE);
@@ -269,8 +285,8 @@ public class ServicesProductListAdapter extends RecyclerView.Adapter<ServicesPro
             layoutAddTocartBest = itemView.findViewById(R.id.layoutAddTocartBest);
             ivWishListRemove = itemView.findViewById(R.id.ivWishListRemove);
             ivWishListAdd = itemView.findViewById(R.id.ivWishListAdd);
-            ivWishListRemove.setVisibility(View.INVISIBLE);
-            ivWishListAdd.setVisibility(View.INVISIBLE);
+          /*  ivWishListRemove.setVisibility(View.INVISIBLE);
+            ivWishListAdd.setVisibility(View.INVISIBLE);*/
 
         }
     }

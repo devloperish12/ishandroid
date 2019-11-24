@@ -67,14 +67,14 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                 Toast.makeText(this, "Enter valid email...!!", Toast.LENGTH_SHORT).show();
 
             } else {
-                setForgotPass();
+                /*setForgotPass();*/
             }
         } else {
             GeneralCode.showDialog(ForgotPasswordActivity.this);
         }
     }
 
-    private void setForgotPass() {
+/*    private void setForgotPass() {
         progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -108,7 +108,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                 Toast.makeText(ForgotPasswordActivity.this, "", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

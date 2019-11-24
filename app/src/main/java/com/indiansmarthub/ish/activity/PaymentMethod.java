@@ -88,7 +88,7 @@ import retrofit2.Response;
 
 import static com.indiansmarthub.ish.MainActivity.mBottomNavigationView;
 
-public class PaymentMethod extends AppCompatActivity implements View.OnClickListener{
+public class PaymentMethod extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseHandler databaseHandler;
 
@@ -103,10 +103,11 @@ public class PaymentMethod extends AppCompatActivity implements View.OnClickList
     SharedPreferences prefManager;
     CheckBox checkboxwalletCash;
     EditText etCashEntered;
+    int i=0;
     private String selectedFilePath;
     double grandTotal = 0;
     private Toolbar mToolbar;
-    double subtotalval=0.0,gstval=0,grandtotalval=0,transactionval=0;
+    double subtotalval = 0.0, gstval = 0, grandtotalval = 0, transactionval = 0;
     private static final String TAG = PaymentMethod.class.getSimpleName();
     private static final int PICK_FILE_REQUEST = 1;
     int bytesRead, bytesAvailable, bufferSize;
@@ -119,18 +120,19 @@ public class PaymentMethod extends AppCompatActivity implements View.OnClickList
     private int strGrandTotal;
     int pointsToBeUsed;
     private int wallet;
-    String shipment_id="";
-    RadioButton walletcheck,cardcheck,deliverycheck;
-    String address_id="";
+    String shipment_id = "";
+    RadioButton walletcheck, cardcheck, deliverycheck;
+    String address_id = "";
     LinearLayout transaction;
-      double withtransactionTotal=0;
-      Bitmap documentbit=null;
-      String type="",salt,key;
+    double withtransactionTotal = 0;
+    Bitmap documentbit = null;
+    String type = "", salt, key;
     double amountdb;
     double amount;
     String txnId;
+    public boolean istrue;
 
-    String phone,productName,firstName,email;
+    String phone, productName, firstName, email;
     private boolean isDisableExitConfirmation = false;
     private AppPreference mAppPreference;
 
@@ -141,22 +143,19 @@ public class PaymentMethod extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method);
-        mAppPreference=new AppPreference();
-        transaction=findViewById(R.id.transaction);
+        mAppPreference = new AppPreference();
+        transaction = findViewById(R.id.transaction);
         mToolbar = findViewById(R.id.toolBar);
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         prefManager = PaymentMethod.this.getSharedPreferences("ISH", MODE_PRIVATE);
-try
-{
-    Intent intent=getIntent();
-    address_id=intent.getStringExtra("id");
-}
-catch (Exception e)
-{
-    e.printStackTrace();
-}
+        try {
+            Intent intent = getIntent();
+            address_id = intent.getStringExtra("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         init();
 
         if (GeneralCode.isConnectingToInternet(PaymentMethod.this)) {
@@ -180,18 +179,19 @@ catch (Exception e)
 
 
     private void init() {
+
         databaseHandler = new DatabaseHandler(PaymentMethod.this);
         paymentList = new ArrayList<>();
         WalletCashes = new ArrayList<>();
-      //  tvFileName = findViewById(R.id.tvFileName);
+        //  tvFileName = findViewById(R.id.tvFileName);
         radioGroupPayment = findViewById(R.id.radioGroupPayment);
         paymentCOD = findViewById(R.id.paymentCOD);
         tvGrandTotalPayment = findViewById(R.id.tvGrandTotalPayment);
         continuePayment = findViewById(R.id.continuePayment);
         tvSubTotalPayment = findViewById(R.id.tvSubTotalPayment);
-     //   checkboxwalletCash = findViewById(R.id.checkboxwalletCash);
+        //   checkboxwalletCash = findViewById(R.id.checkboxwalletCash);
         layoutPaymentCash = findViewById(R.id.layoutPaymentCash);
-      //  etCashEntered = findViewById(R.id.etCashEntered);
+        //  etCashEntered = findViewById(R.id.etCashEntered);
         tvSkyBalance = findViewById(R.id.tvSkyBalance);
         tvUsedCash = findViewById(R.id.tvUsedCash);
         layoutAddCash = findViewById(R.id.layoutAddCash);
@@ -199,10 +199,10 @@ catch (Exception e)
 
         mRecyclerView = findViewById(R.id.rvcartpayment);
         findViewById(R.id.btnUplodaFile).setOnClickListener(this);
-       file=findViewById(R.id.file);
-       // findViewById(R.id.btnAtech).setOnClickListener(this);
-      //  subTotal = getIntent().getStringExtra("subTotal");
-      //  tvSubTotalPayment.setText("\u20b9 " + String.format("%.2f", Double.parseDouble(subTotal)));
+        file = findViewById(R.id.file);
+        // findViewById(R.id.btnAtech).setOnClickListener(this);
+        //  subTotal = getIntent().getStringExtra("subTotal");
+        //  tvSubTotalPayment.setText("\u20b9 " + String.format("%.2f", Double.parseDouble(subTotal)));
 
 
         //
@@ -211,20 +211,41 @@ catch (Exception e)
         mSgst = findViewById(R.id.tvSgst);
         mTotalAmount = findViewById(R.id.tvSubTotalPayment);
         mGrandTotal = findViewById(R.id.tvgrandtotal);
-        walletcheck=findViewById(R.id.rd1);
-        cardcheck=findViewById(R.id.rd2);
-        deliverycheck=findViewById(R.id.rd3);
+        walletcheck = findViewById(R.id.rd1);
+        walletcheck.setChecked(false);
+        cardcheck = findViewById(R.id.rd2);
+        deliverycheck = findViewById(R.id.rd3);
         deliverycheck.setVisibility(View.GONE);
         mShipping.setText("Excluding");
+        walletcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+
+            }
+        });
         walletcheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                walletcheck.setChecked(true);
                 cardcheck.setChecked(false);
                 transaction.setVisibility(View.GONE);
+                type="wallet";
                 deliverycheck.setChecked(false);
-                grandtotalval=subtotalval+gstval;
-                mGrandTotal.setText(""+grandtotalval);
+                grandtotalval = subtotalval + gstval;
+                mGrandTotal.setText("" + grandtotalval);
                 mSgst.setVisibility(View.GONE);
+                grandTotal=Double.parseDouble(mGrandTotal.getText().toString());
+                if (amount > grandTotal) {
+                    double x = amount - grandTotal;
+                    tvSkyBalance.setText("Your Amount Balance is ="+String.format("%.2f",x));
+
+                } else {
+
+
+                }
+                istrue=true;
+
 
 
             }
@@ -232,15 +253,16 @@ catch (Exception e)
         cardcheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvSkyBalance.setText("Your wallet balance is       \u20b9 " + amount);
                 walletcheck.setChecked(false);
                 deliverycheck.setChecked(false);
                 transaction.setVisibility(View.VISIBLE);
-                double transaction=(grandtotalval/100)*2;
+                double transaction = (grandtotalval / 100) * 2;
                 mSgst.setVisibility(View.VISIBLE);
-                mSgst.setText(""+transaction);
-                withtransactionTotal=grandtotalval+transaction;
-                double totalval=subtotalval+gstval;
-                mGrandTotal.setText(""+withtransactionTotal);
+                mSgst.setText("" + transaction);
+                withtransactionTotal = grandtotalval + transaction;
+                double totalval = subtotalval + gstval;
+                mGrandTotal.setText("" + withtransactionTotal);
 
 
             }
@@ -262,26 +284,34 @@ catch (Exception e)
         if (prefManager.getBoolean("isMembership", false)) {
         }
     }
-    public void walleDetail()
-    {
-        final String token=prefManager.getString("cust_id","");
-        final String url="http://52.66.136.244/api/v1/wallet";
+
+    public void walleDetail() {
+        final String token = prefManager.getString("cust_id", "");
+
+
+
+        String   url = "http://52.66.136.244/api/v1/wallet";
+
         RequestQueue requestQueue = Volley.newRequestQueue(PaymentMethod.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
 
                     object = new JSONObject(response);
-                    String status=object.getString("success");
-                    String amount=object.getString("amount");
-                    amountdb=Double.parseDouble(amount);
-                    if(!status.equals("")) {
+                    String status = object.getString("success");
+                    String mount = object.getString("amount");
+                    amountdb = Double.parseDouble(mount);
+                    amount = amountdb;
+                    if (!status.equals("")) {
                         continuePayment.setVisibility(View.VISIBLE);
                         continuePayment.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                if(cardcheck.isChecked()||walletcheck.isChecked()){
+
+
 
                                 AlertDialog.Builder builder;
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -303,7 +333,7 @@ catch (Exception e)
                                                         e.printStackTrace();
                                                     }
                                                     if (amt > amountdb) {
-                                                Toast.makeText(PaymentMethod.this,"you dont have sufficiant balance",Toast.LENGTH_LONG).show();
+                                                        Toast.makeText(PaymentMethod.this, "you dont have sufficiant balance", Toast.LENGTH_LONG).show();
                                                     } else {
                                                         if (documentbit == null) {
                                                             sendDetail();
@@ -312,10 +342,8 @@ catch (Exception e)
                                                             uploadBitmap(documentbit);
                                                         }
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    type="Payu";
+                                                } else {
+                                                    type = "Payu";
                                                     launchPayUMoneyFlow();
                                                 }
                                                 //Toast.makeText(getActivity(),"Data has been Post Successfully",Toast.LENGTH_SHORT).show();
@@ -329,19 +357,20 @@ catch (Exception e)
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .show();
 
+                                }else {
+                                    Toast.makeText(PaymentMethod.this, "Please select a payment option.", Toast.LENGTH_SHORT).show();
+                                }
 
                             }
                         });
                         //  }
 
 
-                        tvSkyBalance.setText("Your wallet balance is       \u20b9 " + amount);
+                        tvSkyBalance.setText("Your wallet balance is       \u20b9 " + mount);
 
 //                        cart=""+getCarts.length();
 //                        getWishList();
-                    }
-                    else
-                    {
+                    } else {
                         //Toast.makeText(PaymentMethod.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     }
 
@@ -353,7 +382,7 @@ catch (Exception e)
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
+                Log.d("Login", "" + error.getCause());
             }
         }) {
 
@@ -370,11 +399,11 @@ catch (Exception e)
         requestQueue.add(stringRequest);
     }
 
-    private void getCountApi() {
+  /*  private void getCountApi() {
 
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         //  Call<AcHomeProducts> categoriesCall = networkService.getAcProducts("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", prefManager.getString("cust_id", ""));
-        Call<Count> categoriesCall = networkService.getcount("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo",prefManager.getString("cust_id", ""));
+        Call<Count> categoriesCall = networkService.getcount("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", prefManager.getString("cust_id", ""));
 
         categoriesCall.enqueue(new Callback<Count>() {
             @Override
@@ -386,17 +415,17 @@ catch (Exception e)
 
                             try {
 
-                                mShipping.setText("\u20b9 " +response.body().getShipping());
-                                mCgst.setText("\u20b9 " +response.body().getCGST());
-                                mSgst.setText("\u20b9 " +response.body().getSGST());
-                                mTotalAmount.setText("\u20b9 " +response.body().getTotalamount());
-                                mGrandTotal.setText("\u20b9 " +response.body().getGrandtotal());
+                                mShipping.setText("\u20b9 " + response.body().getShipping());
+                                mCgst.setText("\u20b9 " + response.body().getCGST());
+                                mSgst.setText("\u20b9 " + response.body().getSGST());
+                                mTotalAmount.setText("\u20b9 " + response.body().getTotalamount());
+                                mGrandTotal.setText("\u20b9 " + response.body().getGrandtotal());
                                 strGrandTotal = Integer.parseInt(response.body().getGrandtotal());
-                                if (strGrandTotal<=wallet){
+                                if (strGrandTotal <= wallet) {
                                     etCashEntered.setHint(String.valueOf(strGrandTotal));
                                 }
                                 totalamount = String.valueOf(response.body().getGrandtotal());
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -408,7 +437,7 @@ catch (Exception e)
                     }
                 } else {
 
-                   // Log.e("tag_count", "Something went wrong...!!");
+                    // Log.e("tag_count", "Something went wrong...!!");
                     //  Toast.makeText(getActivity(), "Something went wrong...!!", Toast.LENGTH_SHORT).show();
 
                 }
@@ -417,7 +446,7 @@ catch (Exception e)
             @Override
             public void onFailure(Call<Count> call, Throwable t) {
 
-               // Log.e("tag_count1", "Something went wrong...!!");
+                // Log.e("tag_count1", "Something went wrong...!!");
                 //  Toast.makeText(getActivity(), "Something went wrong...!!", Toast.LENGTH_SHORT).show();
 
             }
@@ -433,7 +462,7 @@ catch (Exception e)
 
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<GeneralModel> responseCall = networkService.setPaymentMethod("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", prefManager.getString("cust_id", ""), "setpayment", "cashondelivery");
-        Log.e("tag_params", "NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo"+","+ prefManager.getString("cust_id", "")+","+ "setpayment"+","+ "cashondelivery");
+        Log.e("tag_params", "NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo" + "," + prefManager.getString("cust_id", "") + "," + "setpayment" + "," + "cashondelivery");
 
         responseCall.enqueue(new Callback<GeneralModel>() {
             @Override
@@ -445,44 +474,39 @@ catch (Exception e)
                         Log.e("tag_res", response.body().getMessage());
                         if (checkboxwalletCash.isChecked()) {
                             tvSkyBalance.setVisibility(View.VISIBLE);
-                            if (wallet !=0) {
+                            if (wallet != 0) {
 
                                 if (etCashEntered.getText().toString().isEmpty()) {
 
-                                    if (strGrandTotal<=wallet){
+                                    if (strGrandTotal <= wallet) {
                                         pointsToBeUsed = strGrandTotal;
                                         placeYourOrder(pointsToBeUsed);
-                                    }
-                                    else {
+                                    } else {
                                         pointsToBeUsed = wallet;
                                         placeYourOrder(pointsToBeUsed);
                                     }
 
-                                }
-                                else {
+                                } else {
                                     int amountEnter = Integer.parseInt(etCashEntered.getText().toString());
-                                    if (amountEnter<=wallet){
-                                        if (amountEnter<=strGrandTotal){
-                                            pointsToBeUsed=amountEnter;
+                                    if (amountEnter <= wallet) {
+                                        if (amountEnter <= strGrandTotal) {
+                                            pointsToBeUsed = amountEnter;
                                             placeYourOrder(pointsToBeUsed);
-                                        }
-                                        else {
+                                        } else {
                                             Toast.makeText(PaymentMethod.this, "Please enter correct amount!", Toast.LENGTH_SHORT).show();
                                         }
 
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(PaymentMethod.this, "You don't have sufficient balance.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             } else {
-                                pointsToBeUsed =0;
+                                pointsToBeUsed = 0;
                                 placeYourOrder(pointsToBeUsed);
                             }
 
-                        }
-                        else {
-                            pointsToBeUsed =0;
+                        } else {
+                            pointsToBeUsed = 0;
                             placeYourOrder(pointsToBeUsed);
                         }
 
@@ -492,7 +516,7 @@ catch (Exception e)
                         progressDialog.dismiss();
                         Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
-                }      else {
+                } else {
                     progressDialog.dismiss();
                     Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
@@ -504,12 +528,12 @@ catch (Exception e)
             public void onFailure(Call<GeneralModel> call, Throwable t) {
 
                 progressDialog.dismiss();
-              //  Toast.makeText(PaymentMethod.this, "Something went wrong...!!", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(PaymentMethod.this, "Something went wrong...!!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
-    private void placeYourOrder(int skmused) {
+ /*   private void placeYourOrder(int skmused) {
 
         Log.e("tag_skmused", String.valueOf(skmused));
 
@@ -520,7 +544,7 @@ catch (Exception e)
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<GeneralModel> responseCall = networkService.placeOrders("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", prefManager.getString("cust_id", ""), String.valueOf(skmused));
 
-        Log.e("tag_paramspo", "NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo"+","+ prefManager.getString("cust_id", "")+","+ String.valueOf(skmused));
+        Log.e("tag_paramspo", "NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo" + "," + prefManager.getString("cust_id", "") + "," + String.valueOf(skmused));
 
         responseCall.enqueue(new Callback<GeneralModel>() {
             @Override
@@ -534,15 +558,14 @@ catch (Exception e)
                             editor.putBoolean("isMembership", true);
                             editor.apply();
                         }
-                        Toast.makeText(PaymentMethod.this,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(PaymentMethod.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         databaseHandler.emptyCart();
                         Intent intent = new Intent(PaymentMethod.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
                         progressDialog.dismiss();
-                    }
-                    else {
+                    } else {
                         Log.e("tag_order", response.body().getMessage());
 
                         progressDialog.dismiss();
@@ -562,12 +585,12 @@ catch (Exception e)
             public void onFailure(Call<GeneralModel> call, Throwable t) {
 
                 progressDialog.dismiss();
-               // Toast.makeText(PaymentMethod.this, "Something went wrong...!!", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(PaymentMethod.this, "Something went wrong...!!", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
-
+*/
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -575,12 +598,12 @@ catch (Exception e)
                 showFileChooser();
                 if (selectedFilePath != null) {
 
-                    if(ActivityCompat.checkSelfPermission(PaymentMethod.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(PaymentMethod.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    if (ActivityCompat.checkSelfPermission(PaymentMethod.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(PaymentMethod.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(PaymentMethod.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                         // this will request for permission when permission is not true
-                    }else{
+                    } else {
                         // Download code here
-                       // uploadFile(selectedFilePath);
+                        // uploadFile(selectedFilePath);
                     }
                 } else {
                     Toast.makeText(PaymentMethod.this, "Please choose a File First", Toast.LENGTH_SHORT).show();
@@ -609,9 +632,8 @@ catch (Exception e)
                     selectedFileUri = data.getData();
                     documentbit = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedFileUri);
                     file.setText("Document attached");
-                   // uploadBitmap(bitmap);
-                }catch (Exception e)
-                {
+                    // uploadBitmap(bitmap);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -633,11 +655,10 @@ catch (Exception e)
                     // Response from Payumoney
                     String payuResponse = transactionResponse.getPayuResponse();
                     try {
-                        JSONObject object=new JSONObject(payuResponse);
-                        JSONObject res=object.getJSONObject("result");
-                        String status=res.getString("status");
-                        if(status.equalsIgnoreCase("success"))
-                        {
+                        JSONObject object = new JSONObject(payuResponse);
+                        JSONObject res = object.getJSONObject("result");
+                        String status = res.getString("status");
+                        if (status.equalsIgnoreCase("success")) {
                             if (documentbit == null) {
                                 sendDetail();
 
@@ -646,8 +667,7 @@ catch (Exception e)
                             }
 
                         }
-                    }catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
@@ -673,6 +693,7 @@ catch (Exception e)
 
         }
     }
+
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
@@ -693,61 +714,57 @@ catch (Exception e)
         return super.onOptionsItemSelected(item);
     }
 
-    private void getDetail()
-    {
-       // final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Proccessing....Please wait");
-        final String token=prefManager.getString("cust_id","");
+    private void getDetail() {
+        // final ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Proccessing....Please wait");
+        final String token = prefManager.getString("cust_id", "");
 
-        final String url="http://52.66.136.244/api/v1/choosepayment";
+        final String url = "http://52.66.136.244/api/v1/choosepayment";
         RequestQueue requestQueue = Volley.newRequestQueue(PaymentMethod.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
 
                     object = new JSONObject(response);
-                    String status=object.getString("success");
-                   // JSONObject statusjson=object.getJSONObject("shipmentid");
-                     String gst=object.getString("gst");
-                     String shipping_id=object.getString("shipmentid");
-                     String subtotal=object.getString("subtotal");
-                     String grandtotal=object.getString("grandtotal");
-                    subtotalval=Double.parseDouble(subtotal);
-                    gstval=Double.parseDouble(gst);
+                    String status = object.getString("success");
+                    // JSONObject statusjson=object.getJSONObject("shipmentid");
+                    String gst = object.getString("gst");
+                    String shipping_id = object.getString("shipmentid");
+                    String subtotal = object.getString("subtotal");
+                    String grandtotal = object.getString("grandtotal");
+                    subtotalval = Double.parseDouble(subtotal);
+                    gstval = Double.parseDouble(gst);
                     mCgst.setText(gst);
-                    double totalval=subtotalval+gstval;
-                    grandtotalval=totalval;
+                    double totalval = subtotalval + gstval;
+                    grandtotalval = totalval;
                     tvGrandTotalPayment.setVisibility(View.VISIBLE);
-                    tvGrandTotalPayment.setText(""+subtotalval);
-                    mGrandTotal.setText(""+totalval);
+                    tvGrandTotalPayment.setText("" + subtotalval);
+                    mGrandTotal.setText("" + totalval);
                     tvSubTotalPayment.setVisibility(View.VISIBLE);
                     tvSubTotalPayment.setText(subtotal);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if(!status.equals("")) {
+                    if (!status.equals("")) {
 //                        String token="Bearer "+statusjson.getString("token");
 //                        Toast.makeText(PaymentMethod.this, "update successfully", Toast.LENGTH_SHORT).show();
 
-                    }
-
-                    else
-                    {
+                    } else {
 
                         Toast.makeText(PaymentMethod.this, "faild", Toast.LENGTH_SHORT).show();
                         //dialog.dismiss();
                     }
-                   // dialog.dismiss();
+                    // dialog.dismiss();
                     ///dialog.dismiss();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                  //  dialog.dismiss();
+                    //  dialog.dismiss();
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
-               // dialog.dismiss();
+                Log.d("Login", "" + error.getCause());
+                // dialog.dismiss();
                 //dialog.dismiss();
             }
         }) {
@@ -763,21 +780,22 @@ catch (Exception e)
         };
         requestQueue.add(stringRequest);
     }
+
     private void uploadBitmap(final Bitmap bitmap) {
 
         //getting the tag from the edittext
-        final String cusid = prefManager.getString("cust_id","");
+        final String cusid = prefManager.getString("cust_id", "");
         //our custom volley request
-        Volleymultipart volleyMultipartRequest = new Volleymultipart(Request.Method.POST, "http://52.66.136.244/api/v1/paymentsuccess?shipped_to_address="+address_id+"&type="+type,
+        Volleymultipart volleyMultipartRequest = new Volleymultipart(Request.Method.POST, "http://52.66.136.244/api/v1/paymentsuccess?shipped_to_address=" + address_id + "&type=" + type,
                 new com.android.volley.Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
                         try {
                             JSONObject obj = new JSONObject(new String(response.data));
                             Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(PaymentMethod.this, "order successfully place", Toast.LENGTH_SHORT).show();
-                                String ordern=obj.getString("order");
-                                payalert(ordern);
+                            Toast.makeText(PaymentMethod.this, "order successfully place", Toast.LENGTH_SHORT).show();
+                            String ordern = obj.getString("order");
+                            payalert(ordern);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -803,6 +821,7 @@ catch (Exception e)
 
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
@@ -833,56 +852,54 @@ catch (Exception e)
         bitmap.compress(Bitmap.CompressFormat.PNG, 50, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-public void sendDetail()
-{
-    final String token=prefManager.getString("cust_id","");
 
-    final String url="http://52.66.136.244/api/v1/paymentsuccess?shipped_to_address="+address_id+"&type="+type;
-    RequestQueue requestQueue = Volley.newRequestQueue(PaymentMethod.this);
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            JSONObject object= null;
-            try {
+    public void sendDetail() {
+        final String token = prefManager.getString("cust_id", "");
 
-                object = new JSONObject(response);
-                String status=object.getString("success");
-                if(status.equals("1")) {
+        final String url = "http://52.66.136.244/api/v1/paymentsuccess?shipped_to_address=" + address_id + "&type=" + type;
+        RequestQueue requestQueue = Volley.newRequestQueue(PaymentMethod.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject object = null;
+                try {
+
+                    object = new JSONObject(response);
+                    String status = object.getString("success");
+                    if (status.equals("1")) {
                         Toast.makeText(PaymentMethod.this, "order successfully place", Toast.LENGTH_SHORT).show();
-                    String ordern=object.getString("order");
-                    payalert(ordern);
+                        String ordern = object.getString("order");
+                        payalert(ordern);
+                    } else {
+
+                        Toast.makeText(PaymentMethod.this, "faild", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    //  dialog.dismiss();
                 }
-
-                else
-                {
-
-                    Toast.makeText(PaymentMethod.this, "faild", Toast.LENGTH_SHORT).show();
-                   }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                //  dialog.dismiss();
             }
-        }
-    }, new com.android.volley.Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.d("Login",""+error.getCause());
-            // dialog.dismiss();
-            //dialog.dismiss();
-        }
-    }) {
-        @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Authorization", token);
-            headers.put("Content-Type", "application/json");
-            return headers;
-        }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Login", "" + error.getCause());
+                // dialog.dismiss();
+                //dialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", token);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
 
 
-    };
-    requestQueue.add(stringRequest);
-}
+        };
+        requestQueue.add(stringRequest);
+    }
+
     private void launchPayUMoneyFlow() {
 
         PayUmoneyConfig payUmoneyConfig = PayUmoneyConfig.getInstance();
@@ -897,7 +914,7 @@ public void sendDetail()
 
         PayUmoneySdkInitializer.PaymentParam.Builder builder = new PayUmoneySdkInitializer.PaymentParam.Builder();
 
-         amount =Double.parseDouble(mGrandTotal.getText().toString());
+        amount = Double.parseDouble(mGrandTotal.getText().toString());
         try {
             //amount = Double.parseDouble(amount_et.getText().toString());
 
@@ -907,10 +924,10 @@ public void sendDetail()
         txnId = System.currentTimeMillis() + "";
         //String txnId = "TXNID720431525261327973";
 
-         phone = "8607646841";
+        phone = "8607646841";
         productName = "indian smart hub products";
-         firstName = "jagsun";
-         email = "support@indiansmarthub.net";
+        firstName = "jagsun";
+        email = "support@indiansmarthub.net";
         String udf1 = "";
         String udf2 = "";
         String udf3 = "";
@@ -924,8 +941,8 @@ public void sendDetail()
         ((BaseApplication) getApplication()).setAppEnvironment(AppEnvironment.PRODUCTION);
 
         AppEnvironment appEnvironment = ((BaseApplication) getApplication()).getAppEnvironment();
-        salt=appEnvironment.salt();
-        key=appEnvironment.merchant_Key();
+        salt = appEnvironment.salt();
+        key = appEnvironment.merchant_Key();
         builder.setAmount(String.valueOf(amount))
                 .setTxnId(txnId)
                 .setPhone(phone)
@@ -961,9 +978,9 @@ public void sendDetail()
              * Below code is provided to generate hash from sdk.
              * It is recommended to generate hash from server side only.
              * */
-           // mPaymentParams = calculateServerSideHashAndInitiatePayment1(mPaymentParams);
+            // mPaymentParams = calculateServerSideHashAndInitiatePayment1(mPaymentParams);
             gethash();
-               // PayUmoneyFlowManager.startPayUMoneyFlow(mPaymentParams,PaymentMethod.ththiis, R.style.AppTheme_default,false);
+            // PayUmoneyFlowManager.startPayUMoneyFlow(mPaymentParams,PaymentMethod.ththiis, R.style.AppTheme_default,false);
 
         } catch (Exception e) {
             // some exception occurred
@@ -971,6 +988,7 @@ public void sendDetail()
             //payNowButton.setEnabled(true);
         }
     }
+
     private PayUmoneySdkInitializer.PaymentParam calculateServerSideHashAndInitiatePayment1(final PayUmoneySdkInitializer.PaymentParam paymentParam) {
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -995,6 +1013,7 @@ public void sendDetail()
 
         return paymentParam;
     }
+
     public static String hashCal(String str) {
         byte[] hashseq = str.getBytes();
         StringBuilder hexString = new StringBuilder();
@@ -1014,25 +1033,22 @@ public void sendDetail()
         }
         return hexString.toString();
     }
-    public void gethash()
-    {
+
+    public void gethash() {
         //    final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Proccessing....Please wait");
 
-        final String url="http://52.66.136.244/api/v1/checkouthash";
+        final String url = "http://52.66.136.244/api/v1/checkouthash";
         RequestQueue requestQueue = Volley.newRequestQueue(PaymentMethod.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                JSONObject object= null;
+                JSONObject object = null;
                 try {
-                    String status=response;
-                    if(!status.equals("")) {
+                    String status = response;
+                    if (!status.equals("")) {
                         mPaymentParams.setMerchantHash(status);
                         PayUmoneyFlowManager.startPayUMoneyFlow(mPaymentParams, PaymentMethod.this, AppPreference.selectedTheme, mAppPreference.isOverrideResultScreen());
-                    }
-
-                    else
-                    {
+                    } else {
 
                         Toast.makeText(PaymentMethod.this, "fail to update", Toast.LENGTH_SHORT).show();
 
@@ -1047,14 +1063,14 @@ public void sendDetail()
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Login",""+error.getCause());
+                Log.d("Login", "" + error.getCause());
 
                 //dialog.dismiss();
             }
         }) {
             @Override
             public byte[] getBody() throws AuthFailureError {
-                String httpPostBody="email="+email+"&txnId="+txnId+"&mobile="+phone+"&name="+firstName+"&amount="+amount+"&productinfo="+productName+"&key="+ key+"&salt="+salt;
+                String httpPostBody = "email=" + email + "&txnId=" + txnId + "&mobile=" + phone + "&name=" + firstName + "&amount=" + amount + "&productinfo=" + productName + "&key=" + key + "&salt=" + salt;
                 return httpPostBody.getBytes();
             }
 
@@ -1062,38 +1078,40 @@ public void sendDetail()
         };
         requestQueue.add(stringRequest);
     }
-public  void payalert(String order)
-{
-    AlertDialog.Builder builder;
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        builder = new AlertDialog.Builder(PaymentMethod.this);
-    } else {
-        builder = new AlertDialog.Builder(PaymentMethod.this);
+
+    public void payalert(String order) {
+        Bundle bundle=new Bundle();
+        bundle.putString("order",order);
+        Intent intent=new Intent(PaymentMethod.this,PaymentSuccessActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(PaymentMethod.this);
+        } else {
+            builder = new AlertDialog.Builder(PaymentMethod.this);
+        }
+
+        builder.setTitle("Payment status")
+                .setMessage("Your order successfully place order no :" + order)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(PaymentMethod.this, MainActivity.class);
+                        finish();
+                        startActivity(intent);
+                        //Toast.makeText(getActivity(),"Data has been Post Successfully",Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                //  .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+
     }
-
-    builder.setTitle("Payment status")
-            .setMessage("Your order successfully place order no :"+order)
-            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(PaymentMethod.this,MainActivity.class);
-                    finish();
-                     startActivity(intent);
-                    //Toast.makeText(getActivity(),"Data has been Post Successfully",Toast.LENGTH_SHORT).show();
-                }
-            })
-            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // do nothing
-                }
-            })
-          //  .setIcon(android.R.drawable.ic_dialog_alert)
-            .show();
-
-
-}
-
-
-
 
 
 }

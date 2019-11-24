@@ -66,13 +66,13 @@ public class OrderHistoryDetails extends AppCompatActivity {
         orderItemCounts = findViewById(R.id.orderItemCounts);
         orderItemAmounts = findViewById(R.id.orderItemAmounts);
         if (GeneralCode.isConnectingToInternet(OrderHistoryDetails.this)) {
-            getProducts();
+            /*getProducts();*/
         } else {
 
             nestedscrollviewOrder.setVisibility(View.GONE);
         }
     }
-
+/*
     private void getProducts() {
         progressDialog = new ProgressDialog(OrderHistoryDetails.this);
         progressDialog.setMessage("Loading...");
@@ -128,7 +128,7 @@ public class OrderHistoryDetails extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

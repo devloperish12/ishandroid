@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.AccountInfo">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageView
@@ -32,19 +28,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_20"
-                    android:layout_marginRight="@dimen/margin_20"
                     android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_20"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <EditText
-                        android:focusable="false"
                         android:id="@+id/tvPName"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_45"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/user"
+                        android:focusable="false"
                         android:hint="Demo"
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/margin_10"
@@ -53,29 +48,29 @@
                         android:textSize="@dimen/font_15" />
 
                     <EditText
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_45"
                         android:layout_marginTop="@dimen/margin_10"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/user"
-                        android:hint="Mali"
+                        android:hint="Mail"
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/margin_10"
                         android:singleLine="true"
                         android:textColorHint="@color/colorblack"
-                        android:textSize="@dimen/font_15" />
+                        android:textSize="@dimen/font_15"
+                        android:visibility="gone" />
 
                     <EditText
-                        android:focusable="false"
                         android:id="@+id/etPEmail"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_45"
                         android:layout_marginTop="@dimen/margin_10"
+                        android:editable="false"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/email"
+
+
                         android:hint="demo@gmail.com"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
@@ -85,20 +80,20 @@
                         android:textSize="@dimen/font_15" />
 
                     <EditText
-                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_45"
                         android:layout_marginTop="@dimen/margin_10"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/phone"
                         android:hint="9999999999"
+
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:paddingStart="@dimen/margin_10"
                         android:singleLine="true"
                         android:textColorHint="@color/colorblack"
-                        android:textSize="@dimen/font_15" />
+                        android:textSize="@dimen/font_15"
+                        android:visibility="gone" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -106,7 +101,6 @@
                         android:layout_marginTop="@dimen/margin_10"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/password"
                         android:hint="Password"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
@@ -116,31 +110,160 @@
                         android:textSize="@dimen/font_15"
                         android:visibility="gone" />
 
-                    <EditText
+                    <!--<EditText
+                        android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/margin_45"
                         android:layout_marginTop="@dimen/margin_10"
                         android:background="@drawable/shape_edittext_border"
                         android:drawablePadding="@dimen/margin_10"
-                        android:drawableStart="@drawable/password"
-                        android:hint="Confirm Password"
+                        android:hint=" Password"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:paddingStart="@dimen/margin_10"
                         android:singleLine="true"
                         android:textColorHint="@color/colorblack"
                         android:textSize="@dimen/font_15"
-                        android:visibility="gone" />
+                        android:visibility="visible" />-->
+
+                    <EditText
+                        android:id="@+id/etPhoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="1234"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="City"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="80"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etState"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="State"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="80"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etPinCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="Pincode"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="Address"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="80"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etAddress1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="Address1"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="80"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
+                    <EditText
+                        android:id="@+id/etTAxNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin_45"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/shape_edittext_border"
+                        android:drawablePadding="@dimen/margin_10"
+
+
+                        android:hint="Tax Number"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:maxLength="15"
+                        android:paddingStart="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:textColorHint="@color/colorblack"
+                        android:textSize="@dimen/font_15" />
+
 
                     <Button
-                        android:visibility="gone"
+                        android:layout_marginBottom="50dp"
+                        android:id="@+id/btnUpdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_30"
                         android:background="@drawable/shape_button_border"
                         android:text="Update"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/font_18" />
+                        android:textSize="@dimen/font_18"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -150,4 +273,3 @@
 
     </LinearLayout>
 
-</FrameLayout>

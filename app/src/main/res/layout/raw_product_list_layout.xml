@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/margin_10">
+   >
 
     <android.support.v7.widget.CardView
         android:layout_marginBottom="@dimen/margin_5"
@@ -22,34 +22,36 @@
 
             <RelativeLayout
                 android:layout_margin="5dp"
-                android:layout_width="wrap_content"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/ivProductImage"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
+                    android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/logo" />
 
-               <!-- <ImageView
-                    android:duplicateParentState="true"
+                <ImageView
                     android:id="@+id/ivWishListRemovehome"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_marginLeft="120dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/dimen_5dp"
+                    android:layout_alignParentEnd="true"
+
                     android:src="@drawable/wishlist_outline" />
 
                 <ImageView
-                    android:duplicateParentState="true"
                     android:visibility="gone"
+                    android:layout_marginEnd="@dimen/dimen_5dp"
                     android:id="@+id/ivWishListAddhome"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:layout_width="@dimen/margin_25"
-                    android:layout_height="@dimen/margin_25"
-                    android:layout_marginLeft="120dp"
-                    android:src="@drawable/wishlist_red" />-->
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/wishlist_red" />
             </RelativeLayout>
 
             <TextView
@@ -70,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_5"
-                android:layout_marginTop="@dimen/margin_8"
                 android:textColor=" #f05424"
                 android:textSize="@dimen/font_18"
                 tools:text="₹ 50000" />

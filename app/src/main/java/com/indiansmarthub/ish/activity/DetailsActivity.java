@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -63,6 +64,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import at.blogc.android.views.ExpandableTextView;
 import retrofit2.Call;
@@ -88,7 +91,7 @@ public class DetailsActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManagerPrroductList;
     SharedPreferences prefManager;
     DatabaseHandler databaseHandler;
-    ExpandableTextView tvDescription;
+    WebView tvDescription;
     private ProgressDialog progressDialog;
     private String product_Id;
     double cartAmount = 0;
@@ -250,7 +253,7 @@ public class DetailsActivity extends AppCompatActivity {
         getProductDetailsModel = new ArrayList<>();
         enquiry = findViewById(R.id.enquiry);
         enquiry.setVisibility(View.GONE);
-        button_toggle = findViewById(R.id.button_toggle);
+       /* button_toggle = findViewById(R.id.button_toggle);*/
         tvbuynow = findViewById(R.id.tvbuynow);
         tvVenderName = findViewById(R.id.tvVenderName);
         //  cartCount = findViewById(R.id.cartCount);
@@ -270,7 +273,7 @@ public class DetailsActivity extends AppCompatActivity {
         // tvDescriptionivWishListAdddetails.setAnimationDuration(750L);
 
         // set interpolators for both expanding and collapsing animations
-        tvDescription.setInterpolator(new OvershootInterpolator());
+       /* tvDescription.setInterpolator(new OvershootInterpolator());
         try {
 //            JSONObject disjson = jsonObject.getJSONObject("category");
 //            String discription=disjson.getString("description");
@@ -278,22 +281,22 @@ public class DetailsActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+*/
 // or set them separately
-        tvDescription.setExpandInterpolator(new OvershootInterpolator());
-        tvDescription.setCollapseInterpolator(new OvershootInterpolator());
+       /* tvDescription.setExpandInterpolator(new OvershootInterpolator());
+        tvDescription.setCollapseInterpolator(new OvershootInterpolator());*/
 
 // toggle the ExpandableTextView
-        button_toggle.setOnClickListener(new View.OnClickListener() {
+       /* button_toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 //tvDescription.setText(tvDescription.isExpanded() ? R.string.expand : R.string.collapse);
                 tvDescription.toggle();
             }
         });
-
+*/
 // but, you can also do the checks yourself
-        button_toggle.setOnClickListener(new View.OnClickListener() {
+       /* button_toggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 if (tvDescription.isExpanded()) {
@@ -307,7 +310,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
         enquiry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,7 +324,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
 
-    private void getDetailsProduct() {
+  /*  private void getDetailsProduct() {
 
         progressDialog = new ProgressDialog(DetailsActivity.this);
         progressDialog.setMessage("Loading...");
@@ -377,8 +380,8 @@ public class DetailsActivity extends AppCompatActivity {
 
                             shortdescription = shortdescription.replace(value1, space).replace(value2, space).replace(value3, space);
 
-                            tvDescription.setText(shortdescription);
-                            tvVenderName.setText("  Indian Smart Hub");
+                            tvDescription.loadData(getProductDetailsModel.get(0).getShortdescription(),"text/html","UTF-8");
+                            tvVenderName.setText("Indian Smart Hub");
                             wishlist_status = Integer.parseInt(getProductDetailsModel.get(0).getWishlist());
                             product_Id = getProductDetailsModel.get(0).getId();
                             Picasso.with(DetailsActivity.this)
@@ -421,7 +424,7 @@ public class DetailsActivity extends AppCompatActivity {
 
 
                             final String qty = getProductDetailsModel.get(0).getCart();
-                           /* if (qty.equals("0")) {
+                           *//* if (qty.equals("0")) {
                               //  qty_addtocart_bestProduct.setText("1");
                                 addTocart_ProductDetails.setText("ADD TO CART");
                                 addTocart_ProductDetails.setVisibility(View.VISIBLE);
@@ -431,7 +434,7 @@ public class DetailsActivity extends AppCompatActivity {
                              //   qty_addtocart_bestProduct.setText(qty + "");
                                 addTocart_ProductDetails.setText("ALLREADY IN CART");
 
-                            }*/
+                            }*//*
 
                             addTocart_ProductDetails.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -522,7 +525,7 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
     }
-
+*/
     public void setDetail() {
         try {
             String imageurl;
@@ -539,7 +542,7 @@ public class DetailsActivity extends AppCompatActivity {
             {
                 e.printStackTrace();
             }
-            tvDescription.setText(Html.fromHtml(jsonObject.getString("description")));
+            tvDescription.loadData(jsonObject.getString("description"),"text/html","UTF-8");
             try {
                 JSONArray imgarr = jsonObject.getJSONArray("product_image");
 
@@ -608,11 +611,11 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d("tag_allinone", allinone);
 
 
-        placeOrder(allinone);
+      /*  placeOrder(allinone);*/
 
     }
 
-    private void placeOrder(String json) {
+  /*  private void placeOrder(String json) {
         progressDialog = new ProgressDialog(DetailsActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -637,12 +640,12 @@ public class DetailsActivity extends AppCompatActivity {
                         }
                         Log.e("tag_re", msg);
                         progressDialog.dismiss();
-                       /* if (prefManager.getBoolean("isMembership", false)) {
+                       *//* if (prefManager.getBoolean("isMembership", false)) {
 
 
                             progressDialog.dismiss();
 
-                        }*/
+                        }*//*
                     } else {
                         Toast.makeText(DetailsActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         progressDialog.dismiss();
@@ -661,7 +664,7 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(DetailsActivity.this, "Something went wrong...!!", Toast.LENGTH_LONG).show();
             }
         });
-    }
+    }*/
 
 
     @Override
@@ -958,28 +961,40 @@ public class DetailsActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Pattern ps = Pattern.compile("^[a-zA-Z ]+$");
+                Matcher ms = ps.matcher(nameed.getText().toString());
+                boolean bs = ms.matches();
                 final String cmed = commented.getText().toString();
                 if (nameed.getText().toString().equalsIgnoreCase("")) {
                     nameed.setError("Require field");
                     return;
+                }else  if (!bs) {
+                    nameed.setError("PLease enter valid name.");
+                    return;
                 }
-                if (pred.getText().toString().equalsIgnoreCase("")) {
+               else if (pred.getText().toString().equalsIgnoreCase("")) {
                     pred.setError("Require field");
                     return;
                 }
 
-                if (mobileed.getText().toString().equalsIgnoreCase("") && mobileed.getText().toString().length() != 10) {
-                    nameed.setError("Enter valid mobile no");
+               else if (mobileed.getText().toString().equalsIgnoreCase("") ) {
+                    mobileed.setError("Require Field.");
+                    return;
+                }else if ( mobileed.getText().toString().length() != 10) {
+                    mobileed.setError("Enter valid mobile no");
                     return;
                 }
-                if (cped.getText().toString().equalsIgnoreCase("")) {
+               else if (cped.getText().toString().equalsIgnoreCase("")) {
                     cped.setError("Require field");
                     return;
                 }
-                if (emailed.getText().toString().equalsIgnoreCase("")) {
+               else if (emailed.getText().toString().equalsIgnoreCase("")) {
                     emailed.setError("Require field");
                     return;
-                } else {
+                } else if (!GeneralCode.isValidEmail(emailed.getText().toString())) {
+                    emailed.setError("Please enter valid email address.");
+                    return;
+                }else {
                     if (documentbit == null) {
                         sendEnquiry(nameed.getText().toString(), pred.getText().toString(), mobileed.getText().toString(),
                                 cped.getText().toString(), emailed.getText().toString(), commented.getText().toString());
@@ -1159,7 +1174,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 .load(url)
                                 .error(R.drawable.logo)
                                 .into(ivProductImage);
-                        tvDescription.setText(jsonObject.getString("description"));
+                        tvDescription.loadData(jsonObject.getString("description"),"text/html","UTF-8");
 
                     } else {
 

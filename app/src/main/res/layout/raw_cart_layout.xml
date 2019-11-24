@@ -48,39 +48,39 @@
                     android:textSize="@dimen/font_15" />
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
-                    android:weightSum="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                        <TextView
-                            android:padding="5dp"
-                            android:layout_weight="1.2"
-                            android:layout_gravity="center"
-                            android:id="@+id/tvProductListCartPrice"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_5"
-                            android:textColor="#f05424"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:visibility="visible"
-                            tools:text="Price" />
-                        <TextView
-                            android:padding="5dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.8"
-                            android:id="@+id/tvCartQty"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_5"
-                            android:textColor="#f05424"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:visibility="visible"
-                            tools:text="Cart Qty :" />
+                    <TextView
+                        android:id="@+id/tvProductListCartPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1.2"
+                        android:padding="5dp"
+                        android:textColor="#f05424"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        tools:text="Price" />
 
+                    <TextView
+                        android:id="@+id/tvCartQty"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="0.8"
+                        android:padding="5dp"
+                        android:textColor="#f05424"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:visibility="visible"
+                        tools:text="Cart Qty :" />
 
 
                 </LinearLayout>
@@ -109,51 +109,72 @@
                             android:visibility="visible">
 
                             <TextView
-                                android:layout_gravity="center"
-                                android:text="Qty : "
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Qty : " />
 
                             <LinearLayout
+                                android:id="@+id/linearSpinner"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
-                                android:id="@+id/linearSpinner"
-                                >
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:id="@+id/ivRemove"
+                                    android:layout_marginEnd="5dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_remove_black_24dp" />
+                                <TextView
+                                    android:id="@+id/tvCart"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:textColor="@color/black"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:text=""/>
+
+                                <ImageView
+                                    android:id="@+id/ivAdd"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_add_black_24dp" />
 
                                 <com.jaredrummler.materialspinner.MaterialSpinner
                                     android:id="@+id/spinnerqty"
-                                    android:textColor="@color/gray"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:focusable="true"
+                                    android:visibility="gone"
                                     android:gravity="center"
                                     android:textAlignment="center"
-                                    app:ms_background_color="@color/white"
+                                    android:textColor="@color/gray"
                                     app:ms_arrow_tint="@color/gray"
-                                    app:ms_dropdown_max_height="200dp"
-                                    android:focusable="true"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"/>
+                                    app:ms_background_color="@color/white"
+                                    app:ms_dropdown_max_height="200dp" />
                             </LinearLayout>
 
 
-                            // enter qty
                             <LinearLayout
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
                                 android:id="@+id/qtymore"
-                                android:layout_gravity="center"
-                                android:background="@drawable/border_background_square"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:background="@drawable/border_background_square"
                                 android:visibility="gone">
+
                                 <EditText
                                     android:id="@+id/etEnterQty"
-                                    android:inputType="number"
-                                    android:paddingLeft="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:background="@null"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content" />
+                                    android:inputType="number"
+                                    android:paddingLeft="5dp" />
                             </LinearLayout>
-
 
 
                             //*****
@@ -187,16 +208,16 @@
                         </LinearLayout>
 
 
-
                     </LinearLayout>
 
 
                     <ImageView
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
                         android:id="@+id/delete_cart"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
                         android:src="@drawable/delete" />
 
                 </LinearLayout>
@@ -204,28 +225,28 @@
                 // update qty
 
                 <LinearLayout
-                    android:visibility="gone"
-                    android:layout_marginTop="5dp"
                     android:id="@+id/lineatupdateqty"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
 
                     <TextView
+                        android:id="@+id/btqtyupdate"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="0.6"
+                        android:background="@color/splashorange"
                         android:gravity="center"
                         android:text="Update"
-                        android:textColor="@color/white"
-                        android:background="@color/splashorange"
-                        android:id="@+id/btqtyupdate"
-                        android:layout_weight="0.6"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp" />
+                        android:textColor="@color/white" />
 
                     <TextView
-                        android:layout_weight="1.4"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.4" />
 
                 </LinearLayout>
 

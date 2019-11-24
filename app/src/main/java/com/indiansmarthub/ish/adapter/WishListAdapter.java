@@ -264,15 +264,20 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
                     String wishlistid=object.getString("wishlistid");
                     //JSONObject statusjson=new JSONObject(status);
                     // JSONArray jsonArray=object.getJSONArray("details");
-                    if (!wishlistid.equals("0")) {
+                    if (!object.getString("wishlistid").equals("0")) {
+                       /* Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(context,MainActivity.class);
+                        intent.putExtra("isWish",true);
+                        context.startActivity(intent);*/
                         //ivWishListRemovedetails.setBackgroundResource(R.drawable.wishlist_red);
                     } else {
-                       // ivWishListRemovedetails.setBackgroundResource(R.drawable.wishlist_outline);
-
                         Toast.makeText(context, "Successfully deleted", Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(context,MainActivity.class);
                         intent.putExtra("isWish",true);
                         context.startActivity(intent);
+                       // ivWishListRemovedetails.setBackgroundResource(R.drawable.wishlist_outline);
+
+
                       //  dialog.dismiss();
                     }
                   //  dialog.dismiss();

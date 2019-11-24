@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 public class Support extends Fragment implements View.OnClickListener {
     EditText etCFirstName, etCEmail, etCMobileNumber, etComment;
     View view;
+    Button btnSendMessage;
     ProgressBar mProgressbar;
 
     public Support() {
@@ -40,12 +42,20 @@ public class Support extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_support, container, false);
-        view.findViewById(R.id.btnsendMessage).setOnClickListener(this);
+       btnSendMessage= view.findViewById(R.id.btnsendMessage);
         init();
         return view;
     }
 
     private void init() {
+        btnSendMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validation()){
+                    /*getSupport();*/
+                }
+            }
+        });
         etCFirstName = view.findViewById(R.id.etCFirstName);
         etCEmail = view.findViewById(R.id.etCEmail);
         etCMobileNumber = view.findViewById(R.id.etCMobileNumber);
@@ -57,77 +67,87 @@ public class Support extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (view.getId()){
             case R.id.btnsendMessage:
-                validation();
+                if(validation()){
+                    /*getSupport();*/
+                }
+
                 break;
         }
 
     }
 
-    private void validation() {
-        if (GeneralCode.isConnectingToInternet(getActivity())) {
+    private boolean validation() {
+
             if (GeneralCode.isEmptyString(etCFirstName.getText().toString())) {
-                Toast.makeText(getActivity(), "Enter Frist Name...!!", Toast.LENGTH_SHORT).show();
+                etCFirstName.setError("Please enter your name.");
+                return false;
 
             }  else if (GeneralCode.isEmptyString(etCEmail.getText().toString())) {
-                Toast.makeText(getActivity(), "Enter email...!!", Toast.LENGTH_SHORT).show();
+                etCEmail.setError("Please enter email id.");
+                return false;
+
 
             } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etCEmail.getText().toString()).matches()) {
-                Toast.makeText(getActivity(), "Enter valid email...!!", Toast.LENGTH_SHORT).show();
+                etCEmail.setError("Please enter valid email id.");
+                return false;
 
             } else if (GeneralCode.isEmptyString(etCMobileNumber.getText().toString())) {
-                Toast.makeText(getActivity(), "Enter Mobile Number...!!", Toast.LENGTH_SHORT).show();
+                etCMobileNumber.setError("Please enter mobile number.");
+                return false;
 
             }  else if (GeneralCode.isEmptyString(etComment.getText().toString())) {
-                Toast.makeText(getActivity(), "Enter Comments...!!", Toast.LENGTH_SHORT).show();
+                etComment.setError("Please enter comment.");
+                return false;
 
-            } else {
-                getSupport();
             }
-        } else {
-            GeneralCode.showDialog(getActivity());
-        }
+        return true;
     }
 
-    private void getSupport() {
+/*    private void getSupport() {
+        if(GeneralCode.isConnectingToInternet(getContext())) {
 
-        mProgressbar.setVisibility(View.VISIBLE);
 
-        NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
-        Call<GeneralModel> responseCall = networkService.setContacts("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo",etCFirstName.getText().toString(),etCEmail.getText().toString(),etCMobileNumber.getText().toString(),etComment.getText().toString());
-        responseCall.enqueue(new Callback<GeneralModel>() {
-            @Override
-            public void onResponse(Call<GeneralModel> call, Response<GeneralModel> response) {
-                if (response.body() != null) {
-                    if (response.body().getSuccess().equals("1")) {
+            mProgressbar.setVisibility(View.VISIBLE);
 
-                        Toast.makeText(getActivity(),response.body().getMessage(),Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
+            NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
+            Call<GeneralModel> responseCall = networkService.setContacts( etCFirstName.getText().toString(), etCEmail.getText().toString(), etCMobileNumber.getText().toString(), etComment.getText().toString());
+            responseCall.enqueue(new Callback<GeneralModel>() {
+                @Override
+                public void onResponse(Call<GeneralModel> call, Response<GeneralModel> response) {
+                    if (response.body() != null) {
+                        if (response.body().getSuccess().equals("1")) {
 
+                            Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+
+
+                            mProgressbar.setVisibility(View.GONE);
+                        } else {
+                            mProgressbar.setVisibility(View.GONE);
+                            Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
                         mProgressbar.setVisibility(View.GONE);
                     } else {
+
                         mProgressbar.setVisibility(View.GONE);
                         Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
                     }
+                }
 
+                @Override
+                public void onFailure(Call<GeneralModel> call, Throwable t) {
                     mProgressbar.setVisibility(View.GONE);
-                } else {
-
-                    mProgressbar.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
 
                 }
-            }
-
-            @Override
-            public void onFailure(Call<GeneralModel> call, Throwable t) {
-                mProgressbar.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
+            });
+        }else {
+            Toast.makeText(getContext(), "Please check your internet.", Toast.LENGTH_SHORT).show();
+        }
+    }*/
 
 }

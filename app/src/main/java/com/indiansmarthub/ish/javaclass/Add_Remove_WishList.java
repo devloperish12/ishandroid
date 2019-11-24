@@ -14,9 +14,9 @@ import retrofit2.Response;
 
 public class Add_Remove_WishList {
 
-    public static final void getRemoveWishList(final Context context, String id, String cust_id) {
-        /*final CustomLoadingDialog customLoadingDialog = new CustomLoadingDialog(DetailsActivity.this);
-        customLoadingDialog.show();*/
+  /*  public static final void getRemoveWishList(final Context context, String id, String cust_id) {
+        *//*final CustomLoadingDialog customLoadingDialog = new CustomLoadingDialog(DetailsActivity.this);
+        customLoadingDialog.show();*//*
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<GeneralModel> responseCall = networkService.removeWishList("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", cust_id, id);
 
@@ -51,8 +51,8 @@ public class Add_Remove_WishList {
 
 
     public static final void getAddWishList(final Context context, String id, String sku, String cust_id) {
-      /*  final CustomLoadingDialog customLoadingDialog = new CustomLoadingDialog(DetailsActivity.this);
-        customLoadingDialog.show();*/
+      *//*  final CustomLoadingDialog customLoadingDialog = new CustomLoadingDialog(DetailsActivity.this);
+        customLoadingDialog.show();*//*
         NetworkService networkService = NetworkClient.getClient().create(NetworkService.class);
         Call<GeneralModel> responseCall = networkService.addWishList("NXqXAgFZA0jiWp5t6+=lGpgWJXEkbo", cust_id, id, sku);
 
@@ -79,6 +79,6 @@ public class Add_Remove_WishList {
                 Toast.makeText(context, "Something went wrong...!!", Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
 }

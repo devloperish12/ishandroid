@@ -192,7 +192,9 @@ public class ViewMoreProductListAdapter extends RecyclerView.Adapter<ViewMorePro
             holder.ivWishListRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+/*
                     Add_Remove_WishList.getAddWishList(context,modelProductList.getId(), modelProductList.getSku(), prefManager.getString("cust_id", ""));
+*/
                     holder.ivWishListAdd.setVisibility(View.VISIBLE);
                     holder.ivWishListRemove.setVisibility(View.GONE);
                 }
@@ -205,7 +207,9 @@ public class ViewMoreProductListAdapter extends RecyclerView.Adapter<ViewMorePro
             holder.ivWishListAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+/*
                     Add_Remove_WishList.getRemoveWishList(context,modelProductList.getId(), prefManager.getString("cust_id", ""));
+*/
                     holder.ivWishListRemove.setVisibility(View.VISIBLE);
                     holder.ivWishListAdd.setVisibility(View.GONE);
                 }

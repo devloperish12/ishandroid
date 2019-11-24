@@ -22,6 +22,8 @@
                 android:id="@+id/ivtodaySlider1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/margin_170"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
                 android:src="@drawable/ish_side_logo" />
 
             <TextView

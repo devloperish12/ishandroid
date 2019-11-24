@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity
     private SharedPreferences prefManager = null;
     private String strcartflag = null;
     private String bottomicon;
-   public boolean iscart=false;
+    public boolean iscart = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
         toolbar.setNavigationIcon(null);
-      //  Log.e("tag_custid", prefManager.getString("cust_id", ""));
+        //  Log.e("tag_custid", prefManager.getString("cust_id", ""));
         databaseHandler = new DatabaseHandler(MainActivity.this);
         // call home fragment
 
@@ -90,8 +90,7 @@ public class MainActivity extends AppCompatActivity
                 strcartflag = intent.getStringExtra("cartflag");
                 bottomicon = intent.getStringExtra("bottomicon");
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -102,24 +101,33 @@ public class MainActivity extends AppCompatActivity
         // bottom naviagtion bar
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-       // ArrayList<Addtocart> viewCarts;
+        // ArrayList<Addtocart> viewCarts;
         //viewCarts=databaseHandler.getCart();
-       // int cartval=viewCarts.size();
+        // int cartval=viewCarts.size();
         try {
-            int cart=Integer.parseInt(intent.getStringExtra("cart"));
-            int wishlist=Integer.parseInt(intent.getStringExtra("wish"));
+            if (!intent.getStringExtra("cart").equalsIgnoreCase("")) {
 
-            if (cart > 0) {
-                BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_cart, "" + cart);
-            }
-            if(wishlist>0)
-            {
-                BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_wishList, "" + wishlist);
+                int cart = Integer.parseInt(intent.getStringExtra("cart"));
+                if (cart > 1) {
+                    BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_cart, "" + cart);
 
+                }else{
+                    BottomMenuHelper.removeBadge( mBottomNavigationView, R.id.navigation_cart);
+
+                }
             }
-        }
-        catch (Exception e)
-        {
+            if (intent.getStringExtra("wish").equalsIgnoreCase("")) {
+
+
+                int wishlist = Integer.parseInt(intent.getStringExtra("wish"));
+
+
+                if (wishlist > 0) {
+                    BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_wishList, "" + wishlist);
+
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -146,54 +154,46 @@ public class MainActivity extends AppCompatActivity
             transaction_.replace(R.id.frame_container,cart);
             transaction_.commit();
         }*/
-        try
-        {
-            iscart=intent.getBooleanExtra("iscart",false);
-            if(iscart)
-            {
+        try {
+            iscart = intent.getBooleanExtra("iscart", false);
+            if (iscart) {
 
                 Cart cart = new Cart();
                 FragmentManager manager2 = getSupportFragmentManager();
                 FragmentTransaction transaction2 = manager2.beginTransaction();
-                transaction2.replace(R.id.frame_container,cart);
+                transaction2.replace(R.id.frame_container, cart);
                 transaction2.commit();
                 mBottomNavigationView.setSelectedItemId(R.id.navigation_cart);
+            } else {
+                Home home = new Home();
+                FragmentManager manager_ = getSupportFragmentManager();
+                FragmentTransaction transaction_ = manager_.beginTransaction();
+                transaction_.replace(R.id.frame_container, home);
+                transaction_.commit();
+                try {
+                    mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-
-        else {
-            Home home = new Home();
-            FragmentManager manager_ = getSupportFragmentManager();
-            FragmentTransaction transaction_ = manager_.beginTransaction();
-            transaction_.replace(R.id.frame_container,home);
-            transaction_.commit();
-            try {
-                mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
-            boolean iswish=intent.getBooleanExtra("isWish",false);
-            if(iswish)
-            {
+            boolean iswish = intent.getBooleanExtra("isWish", false);
+            if (iswish) {
                 addTocart();
                 WishList wishList = new WishList();
                 FragmentManager manager1 = getSupportFragmentManager();
                 FragmentTransaction transaction1 = manager1.beginTransaction();
-                transaction1.replace(R.id.frame_container,wishList);
+                transaction1.replace(R.id.frame_container, wishList);
                 transaction1.commit();
                 mBottomNavigationView.setSelectedItemId(R.id.navigation_wishList);
 
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
     }
@@ -201,19 +201,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if(Build.VERSION.SDK_INT > 11) {
+        if (Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
 
             if (!prefManager.getString("cust_id", "").isEmpty()) {
 
                 menu.findItem(R.id.action_logout).setVisible(true);
-              //  menu.findItem(R.id.action_login).setVisible(false);
-
+                //  menu.findItem(R.id.action_login).setVisible(false);
 
 
             } else {
                 menu.findItem(R.id.action_logout).setVisible(false);
-             //   menu.findItem(R.id.action_login).setVisible(true);
+                //   menu.findItem(R.id.action_login).setVisible(true);
 
             }
 
@@ -236,7 +235,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 2000);
 
@@ -265,10 +264,9 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            Intent i= new Intent(MainActivity.this,MainActivity.class);
+            Intent i = new Intent(MainActivity.this, MainActivity.class);
             startActivity(i);
-        }
-        else if (id == R.id.action_logout){
+        } else if (id == R.id.action_logout) {
 
             editor = prefManager.edit();
             editor.clear();
@@ -285,8 +283,6 @@ public class MainActivity extends AppCompatActivity
         }*/
 
 
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -298,26 +294,23 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_aboutus) {
             // Handle the camera action
-        }
-        else if (id == R.id.nav_jagsun) {
+        } else if (id == R.id.nav_jagsun) {
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.jagsun.in/"));
             startActivity(browserIntent);
 
-        }
-        else if (id == R.id.nav_blogs) {
+        } else if (id == R.id.nav_blogs) {
             Blogs blogs = new Blogs();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.frame_container,blogs);
+            transaction.replace(R.id.frame_container, blogs);
             transaction.commit();
-        }
-        else if (id == R.id.nav_support) {
+        } else if (id == R.id.nav_support) {
             Support support = new Support();
             FragmentManager manager_s = getSupportFragmentManager();
             FragmentTransaction transaction_s = manager_s.beginTransaction();
-            transaction_s.replace(R.id.frame_container,support);
+            transaction_s.replace(R.id.frame_container, support);
             transaction_s.commit();
 
         } else if (id == R.id.nav_share) {
@@ -343,7 +336,7 @@ public class MainActivity extends AppCompatActivity
                     Home home = new Home();
                     FragmentManager manager_ = getSupportFragmentManager();
                     FragmentTransaction transaction_ = manager_.beginTransaction();
-                    transaction_.replace(R.id.frame_container,home);
+                    transaction_.replace(R.id.frame_container, home);
                     transaction_.commit();
                     return true;
 
@@ -351,7 +344,7 @@ public class MainActivity extends AppCompatActivity
                     SearchFragment searchFragment = new SearchFragment();
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.frame_container,searchFragment);
+                    transaction.replace(R.id.frame_container, searchFragment);
                     transaction.commit();
                     return true;
 
@@ -360,7 +353,7 @@ public class MainActivity extends AppCompatActivity
                     WishList wishList = new WishList();
                     FragmentManager manager1 = getSupportFragmentManager();
                     FragmentTransaction transaction1 = manager1.beginTransaction();
-                    transaction1.replace(R.id.frame_container,wishList);
+                    transaction1.replace(R.id.frame_container, wishList);
                     transaction1.commit();
                     return true;
 
@@ -368,29 +361,37 @@ public class MainActivity extends AppCompatActivity
 
                     /*Intent intent = new Intent(MainActivity.this, PayUMoneyActivity.class);
                     startActivity(intent);*/
-try {
-    addTocart();
-    Cart cart = new Cart();
-    FragmentManager manager2 = getSupportFragmentManager();
-    FragmentTransaction transaction2 = manager2.beginTransaction();
-    transaction2.replace(R.id.frame_container, cart);
-    transaction2.commit();
-}catch (Exception e)
-{
-    e.printStackTrace();
-}
+                    try {
+                        addTocart();
+                        Cart cart = new Cart();
+                        FragmentManager manager2 = getSupportFragmentManager();
+                        FragmentTransaction transaction2 = manager2.beginTransaction();
+                        transaction2.replace(R.id.frame_container, cart);
+                        transaction2.commit();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     return true;
                 case R.id.navigation_account:
                     Account account = new Account();
                     FragmentManager manager3 = getSupportFragmentManager();
                     FragmentTransaction transaction3 = manager3.beginTransaction();
-                    transaction3.replace(R.id.frame_container,account);
+                    transaction3.replace(R.id.frame_container, account);
                     transaction3.commit();
                     return true;
             }
             return false;
         }
     };
+    public  void loadFragment(){
+        addTocart();
+        Home home = new Home();
+        FragmentManager manager_ = getSupportFragmentManager();
+        FragmentTransaction transaction_ = manager_.beginTransaction();
+        transaction_.replace(R.id.frame_container, home);
+        transaction_.commit();
+    }
+
     public void addTocart() {
         final String token = prefManager.getString("cust_id", "");
         //final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Proccessing....Please wait");
@@ -408,10 +409,10 @@ try {
                     JSONArray getCarts = object.getJSONArray("cart");
                     // JSONArray jsonArray=object.getJSONArray("details");
                     if (!status.equals("")) {
-                        if(getCarts.length()>0) {
+                        if (getCarts.length() > 0) {
                             BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_cart, "" + getCarts.length());
                         }
-                       // cart = "" + getCarts.length();
+                        // cart = "" + getCarts.length();
                         getWishList();
                     } else {
 
@@ -465,13 +466,11 @@ try {
                     //int lenght=0;
                     if (status.equals("1")) {
                         JSONArray jsonArray = object.getJSONArray("whislist");
-                        if(jsonArray.length()>0) {
+                        if (jsonArray.length() > 0) {
                             // wishlist = "" + jsonArray.length();
                             BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_wishList, "" + jsonArray.length());
-                        }
-                        else
-                        {
-                           // BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_wishList, "");
+                        } else {
+                            // BottomMenuHelper.showBadge(MainActivity.this, mBottomNavigationView, R.id.navigation_wishList, "");
 
                         }
 

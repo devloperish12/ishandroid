@@ -168,7 +168,7 @@ RecyclerView mRecyclerView;
                                         .setMessage("Are you sure you want to Delete the Address?")
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
-                                                callcustomerAddressDeleteApi(CustomerAddressArrayList,position, id);
+                                                /*callcustomerAddressDeleteApi(CustomerAddressArrayList,position, id);*/
                                                 //Toast.makeText(getActivity(),"Data has been Post Successfully",Toast.LENGTH_SHORT).show();
                                                try {
                                                    String id = getAddress.getJSONObject(position).getString("id");
@@ -231,6 +231,7 @@ RecyclerView mRecyclerView;
         requestQueue.add(stringRequest);
     }
 
+/*
 
     private void callCustomerAddressApi() {
         progressDialog = new ProgressDialog(CustomerAddressActivity.this);
@@ -275,10 +276,12 @@ RecyclerView mRecyclerView;
                                         startActivity(intent);
                                        // getBillingAddress(fName, lName, street, city, region, postcode, country, telephone_);
                                       //  Log.e("tag_e",fName+","+ lName+","+ street+","+ city+","+ region+","+ postcode+","+ country+","+ telephone_);
-                                      /*  i.putExtra("image", finalCreativeGallery.get(position).getImg());
+                                      */
+/*  i.putExtra("image", finalCreativeGallery.get(position).getImg());
                                         i.putExtra("title", finalCreativeGallery.get(position).getName());
                                         i.putExtra("date", finalCreativeGallery.get(position).getDate());
-                                        i.putExtra("contain", finalCreativeGallery.get(position).getContent());*/
+                                        i.putExtra("contain", finalCreativeGallery.get(position).getContent());*//*
+
                                     //    startActivity(i);
                                     }
 
@@ -457,6 +460,7 @@ RecyclerView mRecyclerView;
         });
 
     }
+*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

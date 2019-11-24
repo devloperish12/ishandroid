@@ -35,6 +35,9 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:inputType="textCapSentences"
+                    android:maxLength="32"
+                    android:maxLines="1"
 
                     android:background="@null"
                     android:id="@+id/etCFirstName"
@@ -53,6 +56,8 @@
                 android:layout_marginTop="@dimen/margin_10">
 
                 <EditText
+                    android:maxLines="1"
+                    android:maxLength="34"
                     android:background="@null"
                     android:id="@+id/etCEmail"
                     android:layout_width="match_parent"
@@ -71,11 +76,13 @@
 
                 <EditText
                     android:maxLength="10"
+
                     android:background="@null"
                     android:id="@+id/etCMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_45"
                     android:hint="Telephone"
+                    android:digits="0123456789"
                     android:inputType="number" />
 
             </android.support.design.widget.TextInputLayout>
@@ -90,6 +97,7 @@
 
                 <EditText
                     android:gravity="top"
+                    android:maxLines="4"
                     android:lines="4"
                     android:background="@null"
                     android:id="@+id/etComment"

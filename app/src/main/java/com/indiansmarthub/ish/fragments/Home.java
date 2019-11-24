@@ -34,6 +34,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonArray;
+import com.indiansmarthub.ish.MainActivity;
 import com.indiansmarthub.ish.R;
 import com.indiansmarthub.ish.activity.AllServices;
 import com.indiansmarthub.ish.activity.DetailsActivity;
@@ -51,6 +52,7 @@ import com.indiansmarthub.ish.adapter.SlidingImageAdapter1;
 import com.indiansmarthub.ish.adapter.SlidingImageAdapter2;
 import com.indiansmarthub.ish.adapter.SubServicesAdapter;
 import com.indiansmarthub.ish.custom.GeneralCode;
+import com.indiansmarthub.ish.intrface.onItemCLickListner;
 import com.indiansmarthub.ish.javaclass.BottomMenuHelper;
 import com.indiansmarthub.ish.javaclass.RecyclerItemClickListener;
 import com.indiansmarthub.ish.model.AcHomeProducts;
@@ -78,6 +80,7 @@ import com.indiansmarthub.ish.model.ServicesModel;
 import com.indiansmarthub.ish.retrofit.NetworkClient;
 import com.indiansmarthub.ish.retrofit.NetworkService;
 import com.indiansmarthub.ish.sqlite.DatabaseHandler;
+import com.payumoney.sdkui.ui.utils.ToastUtils;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -147,8 +150,10 @@ public class Home extends Fragment {
     JSONArray bannerarray=new JSONArray();
     JSONArray mallarray=new JSONArray();
     JSONArray featurearray=new JSONArray();
-LinearLayout servicelayout;
-Context context;
+    LinearLayout servicelayout;
+    Context context;
+    Fragment fragment;
+    private int product_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -156,6 +161,7 @@ Context context;
         // Inflate the layout for this fragment
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        fragment=this;
        // mProgressBar = view.findViewById(R.id.progress_bar);
         servicelayout= view.findViewById(R.id.featureproduct);
         imageSliderViewPager = view.findViewById(R.id.imageSliderViewPager);
@@ -171,7 +177,7 @@ Context context;
         rv_subcategory = view.findViewById(R.id.rv_subcategory);
         intiId();
 
-context=getActivity();
+        context=getActivity();
         btnFeaturedViewMore = view.findViewById(R.id.btnFeaturedViewMore);
 
 
@@ -287,7 +293,28 @@ context=getActivity();
                                 servicelayout.addView(recyclerView);
                                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2);
 
-                                financialFluxAdapter = new FinancialFluxAdapter(context, jsonArray1, url);
+                                financialFluxAdapter = new FinancialFluxAdapter(context, jsonArray1, url, new onItemCLickListner() {
+                                    @Override
+                                    public void onItemCLick(int position, View view, String entity) {
+                                        if(entity.equals("add")){
+                                            try {
+                                                product_id=jsonArray1.getJSONObject(position).getInt("id");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            addWishList();
+
+                                        }else {
+                                            try {
+                                                product_id=jsonArray1.getJSONObject(position).getInt("id");
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            addWishList();
+
+                                        }
+                                    }
+                                });
                                 recyclerView.setLayoutManager(gridLayoutManager);
                                 recyclerView.setAdapter(financialFluxAdapter);
                             }catch (Exception e)
@@ -381,6 +408,58 @@ context=getActivity();
                 Map<String, String> map = new HashMap<String, String>();
 
                 return map;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    public void addWishList() {
+        final String token = prefManager.getString("cust_id", "");
+        final ProgressDialog dialog = ProgressDialog.show(fragment.getContext(), "", "Proccessing....Please wait");
+
+        final String url = "http://52.66.136.244/api/v1/wishlist?qty=1&product_id=" + product_id;
+        RequestQueue requestQueue = Volley.newRequestQueue(fragment.getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject object = null;
+                try {
+                    object = new JSONObject(response);
+                    String status = object.getString("success");
+                    String wishlistid=object.getString("wishlistid");
+                    ((MainActivity)getActivity()).loadFragment();
+                    //JSONObject statusjson=new JSONObject(status);
+                    // JSONArray jsonArray=object.getJSONArray("details");
+                    if (!wishlistid.equals("0")) {
+                        Toast.makeText(context, "Product added to wishlist.", Toast.LENGTH_SHORT).show();
+                        ((MainActivity)getActivity()).loadFragment();
+
+                    } else {
+
+                        Toast.makeText(fragment.getContext(), "alreay in wishlist", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                    dialog.dismiss();
+                    ///dialog.dismiss();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    dialog.dismiss();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("Login", "" + error.getCause());
+                dialog.dismiss();
+                //dialog.dismiss();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", token);
+                headers.put("Content-Type", "application/json");
+                return headers;
             }
 
         };

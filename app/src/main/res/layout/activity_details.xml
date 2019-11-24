@@ -47,18 +47,21 @@
                             tools:src="@drawable/logo" />
 
                         <ImageView
+                            android:layout_alignParentEnd="true"
                             android:id="@+id/ivWishListRemovedetails"
                             android:layout_width="@dimen/margin_25"
                             android:layout_height="@dimen/margin_25"
-                            android:layout_marginLeft="@dimen/margin_100"
                             android:layout_marginTop="@dimen/margin_5"
+                            android:layout_marginEnd="25dp"
                             android:src="@drawable/wishlist_outline" />
 
                         <ImageView
+                            android:layout_marginEnd="25dp"
+
+                            android:layout_alignParentEnd="true"
                             android:id="@+id/ivWishListAdddetails"
                             android:layout_width="@dimen/margin_25"
                             android:layout_height="@dimen/margin_25"
-                            android:layout_marginLeft="100dp"
                             android:layout_marginTop="@dimen/margin_5"
                             android:src="@drawable/wishlist_red"
                             android:visibility="gone" />
@@ -81,6 +84,7 @@
                         android:layout_marginTop="@dimen/margin_10"
                         android:layout_marginRight="@dimen/margin_8"
                         android:maxLines="2"
+                        android:textStyle="bold"
                         tools:text="test" />
 
                     <LinearLayout
@@ -90,6 +94,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:textStyle="bold"
                             android:id="@+id/tvProductPrice"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -181,22 +186,27 @@
                             android:text="Description"
                             android:textSize="18dp" />
 
-                        <at.blogc.android.views.ExpandableTextView
+                     <!--   <at.blogc.android.views.ExpandableTextView
                             android:id="@+id/tvDescription_"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="7"
-                            app:animation_duration="750" />
+                            app:animation_duration="750" />-->
+                        <WebView
+                            android:id="@+id/tvDescription_"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            tools:ignore="WebViewLayout" />
 
                         <!-- Optional parameter animation_duration: sets the duration of the expand animation -->
 
-                        <ImageView
+                      <!--  <ImageView
                             android:id="@+id/button_toggle"
                             android:layout_width="@dimen/font_25"
                             android:layout_height="@dimen/font_25"
                             android:layout_gravity="right"
-                            android:src="@drawable/arrow_down" />
+                            android:src="@drawable/arrow_down" />-->
 
 
                         <icegroup.textviewjustify.TextViewJustify

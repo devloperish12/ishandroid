@@ -59,9 +59,9 @@ public class ViewMoreProductActivity extends AppCompatActivity {
         }
         if (GeneralCode.isConnectingToInternet(ViewMoreProductActivity.this)){
             if (flag == 1){
-                getViewMoreProductList();
+                /*getViewMoreProductList();*/
             }else if (flag == 2){
-                getnewArrivalProductList();
+                /*getnewArrivalProductList();*/
             }
 
 
@@ -74,7 +74,7 @@ public class ViewMoreProductActivity extends AppCompatActivity {
 
 
 
-    private void getViewMoreProductList() {
+ /*   private void getViewMoreProductList() {
         progressDialog = new ProgressDialog(ViewMoreProductActivity.this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
@@ -105,10 +105,10 @@ public class ViewMoreProductActivity extends AppCompatActivity {
                             rvProductListViewMore.setAdapter(adapter);
                             //
 
-                           /* viewMoreProductListAdapter = new ViewMoreProductListAdapter();
+                           *//* viewMoreProductListAdapter = new ViewMoreProductListAdapter();
                             rvProductListViewMore.setLayoutManager(gridLayoutManager);
                             rvProductListViewMore.setAdapter(viewMoreProductListAdapter);
-                            viewMoreProductListAdapter.notifyDataSetChanged();*/
+                            viewMoreProductListAdapter.notifyDataSetChanged();*//*
                             progressDialog.dismiss();
 
 
@@ -174,10 +174,10 @@ public class ViewMoreProductActivity extends AppCompatActivity {
                             rvProductListViewMore.setAdapter(adapter);
                             //
 
-                            /*viewMoreProductListAdapter = new ViewMoreProductListAdapter();
+                            *//*viewMoreProductListAdapter = new ViewMoreProductListAdapter();
                             rvProductListViewMore.setLayoutManager(gridLayoutManager);
                             rvProductListViewMore.setAdapter(viewMoreProductListAdapter);
-                            viewMoreProductListAdapter.notifyDataSetChanged();*/
+                            viewMoreProductListAdapter.notifyDataSetChanged();*//*
                             progressDialog.dismiss();
 
                         }
@@ -210,7 +210,7 @@ public class ViewMoreProductActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
 
     @Override
